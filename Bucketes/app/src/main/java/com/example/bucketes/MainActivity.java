@@ -3,6 +3,7 @@ package com.example.bucketes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText edtTxtName, edtTxtPassword;
     private Button btnLogin;
-    private TextView txtWarnName,txtWarnPassword;
+    private TextView txtWarnName,txtWarnPassword, registrationLink;
     private ConstraintLayout parent;
 
     @Override
@@ -31,6 +32,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 initLogin();
+            }
+        });
+
+        registrationLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(MainActivity.this, RegistrationActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -82,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         edtTxtPassword = findViewById(R.id.editTextPasswordS);
 
         btnLogin = findViewById(R.id.loginButton);
+        registrationLink = findViewById(R.id.linkToRegistration);
 
         txtWarnName = findViewById(R.id.textWarnNameS);
         txtWarnPassword = findViewById(R.id.textWarnPasswordS);
