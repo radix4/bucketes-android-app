@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -20,6 +21,10 @@ public class RegistrationActivity extends AppCompatActivity {
     private Button btnRegister;
     private TextView txtWarnName, loginLink;
     private ConstraintLayout parent;
+    String name;
+    String password1;
+    String password2;
+    DBHelper DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,50 +51,55 @@ public class RegistrationActivity extends AppCompatActivity {
     private void initRegistration() {
         Log.d(TAG, "initRegistration: Started");
 
-        if (validateData()) {
-            showSnackBar();
-        }
+        if (DB.checkusername(name))
+            showSnackBar("User already exists! Please sign in");
+
+        else if (validateData() && DB.insertData(name, password1)) {
+                showSnackBar("Registration Successful");
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        else
+            showSnackBar("Registration failed");
     }
 
-    private void showSnackBar() {
+    private void showSnackBar(String text) {
         Log.d(TAG, "showSnackBar: Started");
         txtWarnName.setVisibility(View.GONE);
         txtWarnPassword1.setVisibility(View.GONE);
         txtWarnPassword2.setVisibility(View.GONE);
 
-        Snackbar.make(parent, "Registration Successful", 1000);
+        Snackbar.make(parent, text, 1000);
     }
 
     private boolean validateData() {
         Log.d(TAG, "validateData: Started");
 
-        // Check if name is empty
-        if (edtTxtName.getText().toString().equals("")) {
-            txtWarnName.setVisibility(View.VISIBLE);
-            txtWarnName.setText("Enter Name");
+        // Check if any fields are empty
+        if (edtTxtName.getText().toString().equals("") || edtTxtPassword1.getText().toString().equals("")
+                || edtTxtPassword2.getText().toString().equals("")) {
+            if (edtTxtName.getText().toString().equals("")) {
+                txtWarnName.setVisibility(View.VISIBLE);
+                txtWarnName.setText("Enter Name");
+            }
+            if (edtTxtPassword1.getText().toString().equals("")) {
+                txtWarnPassword1.setVisibility(View.VISIBLE);
+                txtWarnPassword1.setText("Enter Password");
+            }
+            if (edtTxtPassword2.getText().toString().equals("")) {
+                txtWarnPassword2.setVisibility(View.VISIBLE);
+                txtWarnPassword2.setText("Enter Password");
+            }
             return false;
         }
 
-        // Check if password is empty
-        if (edtTxtPassword1.getText().toString().equals("")) {
+        // Check if passwords match
+        if (!password1.equals(password2)) {
+            Toast.makeText(RegistrationActivity.this, "Passwords don't match", Toast.LENGTH_SHORT).show();
             txtWarnPassword1.setVisibility(View.VISIBLE);
-            txtWarnPassword1.setText("Enter Password");
-            return false;
-        }
-
-        // Check if password confirmation is empty
-        if (edtTxtPassword2.getText().toString().equals("")) {
             txtWarnPassword2.setVisibility(View.VISIBLE);
-            txtWarnPassword2.setText("Confirm Password");
-            return false;
-        }
-
-        // Check if passwords are the same
-        if (!edtTxtPassword1.getText().toString().equals(edtTxtPassword2.getText().toString())) {
             txtWarnPassword1.setText("Passwords don't match");
             txtWarnPassword2.setText("Passwords don't match");
-            txtWarnPassword1.setVisibility(View.VISIBLE);
-            txtWarnPassword2.setVisibility(View.VISIBLE);
             return false;
         }
 
@@ -99,9 +109,13 @@ public class RegistrationActivity extends AppCompatActivity {
     private void initViews() {
         Log.d(TAG, "initViews: Started");
 
-        edtTxtName = findViewById(R.id.editTextNameS);
+        edtTxtName = findViewById(R.id.editTextNameR);
         edtTxtPassword1 = findViewById(R.id.editTextPassword1R);
         edtTxtPassword2 = findViewById(R.id.editTextPassword2R);
+
+        name = edtTxtName.getText().toString();
+        password1 = edtTxtPassword1.getText().toString();
+        password2 = edtTxtPassword2.getText().toString();
 
         btnRegister = findViewById(R.id.registerButton);
         loginLink = findViewById(R.id.loginLink);
@@ -111,6 +125,7 @@ public class RegistrationActivity extends AppCompatActivity {
         txtWarnPassword2 = findViewById(R.id.textWarnPassword2R);
 
         parent = findViewById(R.id.parent1);
+        DB = new DBHelper(this);
     }
 
 }

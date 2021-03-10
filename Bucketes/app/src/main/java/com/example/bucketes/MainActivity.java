@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnLogin;
     private TextView txtWarnName,txtWarnPassword, registrationLink;
     private ConstraintLayout parent;
+    DBHelper DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,25 +64,29 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean validateData() {
         Log.d(TAG, "validateData: Started");
-        if (edtTxtName.getText().toString().equals("")) {
-            txtWarnName.setVisibility(View.VISIBLE);
-            txtWarnName.setText("Enter Name");
-            return false;
-        }
 
-        if (edtTxtPassword.getText().toString().equals("")) {
-            txtWarnPassword.setVisibility(View.VISIBLE);
-            txtWarnPassword.setText("Enter Password");
+        String name = edtTxtName.getText().toString();
+        String password = edtTxtPassword.getText().toString();
+
+        if (name.equals("") || password.equals("")) {
+            if (name.equals("")) {
+                txtWarnName.setVisibility(View.VISIBLE);
+                txtWarnName.setText("Enter Name");
+            }
+            if (password.equals("")) {
+                txtWarnPassword.setVisibility(View.VISIBLE);
+                txtWarnPassword.setText("Enter Password");
+            }
             return false;
         }
 
         // Check with database
-        if (edtTxtPassword.getText().toString().equals("check")) {
-            txtWarnPassword.setVisibility(View.VISIBLE);
-            txtWarnPassword.setText("Wrong Password");
-            return false;
+        Boolean checkuserpass = DB.checkusernamepassword(name, password);
+        if(checkuserpass==true){
+            showSnackBar();
+        }else{
+            Toast.makeText(MainActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
         }
-
         return true;
     }
 
@@ -97,5 +103,6 @@ public class MainActivity extends AppCompatActivity {
         txtWarnPassword = findViewById(R.id.textWarnPasswordS);
 
         parent = findViewById(R.id.parent1);
+        DB = new DBHelper(this);
     }
 }

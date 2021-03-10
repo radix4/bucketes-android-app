@@ -11,13 +11,13 @@
         android:id="@+id/editTextNameS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="35dp"
         android:ems="10"
         android:hint="Name"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+        app:layout_constraintTop_toTopOf="@+id/rectangle" />
 
     <TextView
         android:id="@+id/welcomeTextS"
@@ -50,10 +50,10 @@
         android:id="@+id/editTextPasswordS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="@+id/rectangle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextNameS" />
@@ -70,7 +70,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rectangle" />
+        app:layout_constraintTop_toBottomOf="@+id/rectangle"
+        app:layout_constraintVertical_bias="0.23000002" />
 
     <TextView
         android:id="@+id/linkToRegistration"
@@ -128,11 +129,10 @@
         android:id="@+id/rectangle"
         android:layout_width="297dp"
         android:layout_height="193dp"
-        android:layout_marginTop="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextPasswordS"
+        android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextNameS"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
         app:srcCompat="@drawable/rectangle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,11 +8,13 @@
 
     <ImageView
         android:id="@+id/image4"
-        android:layout_width="430dp"
-        android:layout_height="161dp"
+        android:layout_width="433dp"
+        android:layout_height="147dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginLink"
         app:srcCompat="@drawable/component2" />
 
     <TextView
@@ -32,8 +34,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="228dp"
-        android:layout_height="144dp"
+        android:layout_width="203dp"
+        android:layout_height="134dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,10 +43,10 @@
         app:srcCompat="@drawable/component3" />
 
     <EditText
-        android:id="@+id/editTextNameRegister"
+        android:id="@+id/editTextNameR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="25dp"
         android:ems="10"
         android:hint="Name"
         android:inputType="textPersonName"
@@ -62,9 +64,9 @@
         android:hint="Password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/editTextPassword2R"
-        app:layout_constraintEnd_toEndOf="@+id/editTextNameRegister"
-        app:layout_constraintStart_toStartOf="@+id/editTextNameRegister"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNameRegister" />
+        app:layout_constraintEnd_toEndOf="@+id/editTextNameR"
+        app:layout_constraintStart_toStartOf="@+id/editTextNameR"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNameR" />
 
     <EditText
         android:id="@+id/editTextPassword2R"
@@ -95,11 +97,10 @@
         android:id="@+id/imageView3"
         android:layout_width="271dp"
         android:layout_height="226dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.07999998"
         app:srcCompat="@drawable/square" />
 
     <TextView
@@ -109,10 +110,10 @@
         android:text="Enter Name"
         android:textColor="@android:color/holo_red_dark"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/editTextNameRegister"
-        app:layout_constraintEnd_toEndOf="@+id/editTextNameRegister"
+        app:layout_constraintBottom_toTopOf="@+id/editTextNameR"
+        app:layout_constraintEnd_toEndOf="@+id/editTextNameR"
         app:layout_constraintHorizontal_bias="0.15"
-        app:layout_constraintStart_toStartOf="@+id/editTextNameRegister" />
+        app:layout_constraintStart_toStartOf="@+id/editTextNameR" />
 
     <EditText
         android:id="@+id/textWarnPassword1R"
@@ -120,6 +121,7 @@
         android:layout_height="wrap_content"
         android:text="Passwords didn’t match"
         android:textColor="@android:color/holo_red_dark"
+        android:textSize="14sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/editTextPassword1R"
         app:layout_constraintEnd_toEndOf="@+id/editTextPassword1R"
@@ -132,6 +134,7 @@
         android:layout_height="wrap_content"
         android:text="Confirm Password"
         android:textColor="@android:color/holo_red_dark"
+        android:textSize="14sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/editTextPassword2R"
         app:layout_constraintEnd_toEndOf="@+id/editTextPassword2R"
@@ -142,12 +145,14 @@
         android:id="@+id/loginLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:autoLink="all"
         android:text="Already registered? Sign In"
         android:textColor="#9851e9"
         app:layout_constraintBottom_toTopOf="@+id/image4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerButton"
-        android:autoLink="all"/>
+        app:layout_constraintVertical_bias="0.65999997" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
