@@ -51,25 +51,14 @@ public class RegistrationActivity extends AppCompatActivity {
     private void initRegistration() {
         Log.d(TAG, "initRegistration: Started");
 
-        if (!DB.checkusername(name))
-            Toast.makeText(RegistrationActivity.this, "User already exists! Please sign in", Toast.LENGTH_SHORT).show();
-
-        else if (validateData() && DB.insertData(name, password1)) {
-                Toast.makeText(RegistrationActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-            }
+        if (validateData()) {
+            DB.insertData(name, password1);
+            Toast.makeText(RegistrationActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        }
         else
             Toast.makeText(RegistrationActivity.this, "Registration failed", Toast.LENGTH_SHORT).show();
-    }
-
-    private void showSnackBar(String text) {
-        Log.d(TAG, "showSnackBar: Started");
-        txtWarnName.setVisibility(View.GONE);
-        txtWarnPassword1.setVisibility(View.GONE);
-        txtWarnPassword2.setVisibility(View.GONE);
-
-        Snackbar.make(parent, text, 1000);
     }
 
     private boolean validateData() {
@@ -90,6 +79,12 @@ public class RegistrationActivity extends AppCompatActivity {
                 txtWarnPassword2.setVisibility(View.VISIBLE);
                 txtWarnPassword2.setText("Enter Password");
             }
+            return false;
+        }
+
+        // Check if user already exists
+        if (DB.checkusername(name) == true) {
+            Toast.makeText(RegistrationActivity.this, "User already exists! Please sign in", Toast.LENGTH_SHORT).show();
             return false;
         }
 
