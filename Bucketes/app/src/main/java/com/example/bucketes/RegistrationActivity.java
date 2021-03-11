@@ -51,16 +51,16 @@ public class RegistrationActivity extends AppCompatActivity {
     private void initRegistration() {
         Log.d(TAG, "initRegistration: Started");
 
-        if (DB.checkusername(name))
-            showSnackBar("User already exists! Please sign in");
+        if (!DB.checkusername(name))
+            Toast.makeText(RegistrationActivity.this, "User already exists! Please sign in", Toast.LENGTH_SHORT).show();
 
         else if (validateData() && DB.insertData(name, password1)) {
-                showSnackBar("Registration Successful");
+                Toast.makeText(RegistrationActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }
         else
-            showSnackBar("Registration failed");
+            Toast.makeText(RegistrationActivity.this, "Registration failed", Toast.LENGTH_SHORT).show();
     }
 
     private void showSnackBar(String text) {
