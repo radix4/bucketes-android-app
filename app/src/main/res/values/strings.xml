@@ -1,10 +1,4 @@
 <resources>
- Detailed-Item
-    <string name="app_name">DetailedItemPage</string>
-    <string name="in_progress">In-Progress</string>
-    <string name="completed">Completed</string>
-    <string name="planned">Planned</string>
-
 
     <string name="app_name">Bucketes</string>
 
@@ -26,5 +20,4 @@
         <item>Description 6</item>
     </string-array>
 
- main
 </resources>
