@@ -1,3 +1,23 @@
 <resources>
+
     <string name="app_name">Bucketes</string>
+
+    <string-array name="items">
+        <item>Paris</item>
+        <item>Japan Blossom</item>
+        <item>Sky Diving</item>
+        <item>Lantern Festival</item>
+        <item>Northern Lights</item>
+        <item>World View</item>
+    </string-array>
+
+    <string-array name="descriptions">
+        <item>Description 1</item>
+        <item>Description 2</item>
+        <item>Description 3</item>
+        <item>Description 4</item>
+        <item>Description 5</item>
+        <item>Description 6</item>
+    </string-array>
+
 </resources>

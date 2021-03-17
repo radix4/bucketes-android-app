@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <ListView
-        android:layout_width="294dp"
-        android:layout_height="466dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="144dp"
-        android:layout_marginEnd="61dp"
-        android:layout_marginBottom="121dp" />
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
@@ -37,7 +28,7 @@
         app:rippleColor="#FFF" />
 
     <TextView
-        android:id="@+id/liveYourLifeText"
+        android:id="@+id/txtLiveYourLife"
         android:layout_width="226dp"
         android:layout_height="68dp"
         android:layout_alignParentStart="true"
@@ -45,7 +36,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="90dp"
-        android:layout_marginTop="53dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="94dp"
         android:layout_marginBottom="609dp"
         android:fontFamily="cursive"
@@ -54,10 +45,21 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.063" />
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mainRecyclerView"
+        android:layout_width="413dp"
+        android:layout_height="499dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.514" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
