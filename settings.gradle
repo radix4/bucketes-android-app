@@ -1,2 +1,5 @@
 include ':app'
-rootProject.name = "DetailedItemPage"
+ Detailed-Item
+
+rootProject.name = "Bucketes"
+ main

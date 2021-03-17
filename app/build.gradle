@@ -7,8 +7,12 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
+ Detailed-Item
         applicationId "com.example.detaileditempage"
         minSdkVersion 16
+        applicationId "com.example.bucketes"
+        minSdkVersion 19
+ main
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -29,7 +33,11 @@ android {
 }
 
 dependencies {
+ Detailed-Item
 
+
+    implementation 'com.google.android.material:material:1.3.0'
+ main
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
