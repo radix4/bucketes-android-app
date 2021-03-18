@@ -33,7 +33,11 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initLogin();
+                if (initLogin()) {
+                    // upon click, changes to main activity
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -46,12 +50,15 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void initLogin() {
+    private boolean initLogin() {
         Log.d(TAG, "initLogin: Started");
 
         if (validateData()) {
             showSnackBar();
+            return true;
         }
+
+        return false;
     }
 
     private void showSnackBar() {
@@ -81,13 +88,15 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         // Check with database
-        Boolean checkuserpass = DB.checkusernamepassword(name, password);
-        if(checkuserpass==true){
+        Boolean checkUserPW = DB.checkusernamepassword(name, password);
+        if(checkUserPW) {
             showSnackBar();
-        }else{
+            return true;
+        } else {
             Toast.makeText(LoginActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
         }
-        return true;
+
+        return false;
     }
 
     private void initViews() {
