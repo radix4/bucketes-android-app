@@ -1,4 +1,4 @@
-//package com.example.detaileditempage;
+package com.example.bucketes;
 
 import androidx.appcompat.app.AppCompatActivity;
 
