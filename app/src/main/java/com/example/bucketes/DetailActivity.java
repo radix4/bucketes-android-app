@@ -16,7 +16,7 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.detailed-item);
+        setContentView(R.layout.detailed_item);
 
         radioGroup = findViewById(R.id.radioGroup);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
