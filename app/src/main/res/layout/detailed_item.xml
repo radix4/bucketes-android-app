@@ -22,14 +22,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="checkButton"
-            android:text="@string/planned" />
+            android:text="Planned" />
 
         <RadioButton
             android:id="@+id/in_progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="checkButton"
-            android:text="@string/in_progress"
+            android:text="In Progress"
             tools:layout_editor_absoluteX="109dp"
             tools:layout_editor_absoluteY="305dp" />
 
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="checkButton"
-            android:text="@string/completed"
+            android:text="Completed"
             tools:layout_editor_absoluteX="153dp"
             tools:layout_editor_absoluteY="280dp" />
     </RadioGroup>
