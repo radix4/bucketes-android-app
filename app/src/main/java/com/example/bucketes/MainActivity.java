@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView mainRecyclerView;
 
+    // items here will be changed to a data structure such as ArrayList
     String[] items, descriptions;
 
     @Override
@@ -20,17 +21,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        mainRecyclerView = findViewById(R.id.mainRecyclerView);
-
+        // initialize string arrays from strings.xml
         items = getResources().getStringArray(R.array.items);
         descriptions = getResources().getStringArray(R.array.descriptions);
 
+        // find recycler view from activity_main.xml
+        mainRecyclerView = findViewById(R.id.mainRecyclerView);
 
+        // recycler view needs to set adapter to display the list to the screen
         MainRecyclerViewAdapter mainAdapter = new MainRecyclerViewAdapter(this, items, descriptions);
         mainRecyclerView.setAdapter(mainAdapter);
         mainRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
+
+
+    // TODO: create a logout method
 
 
 
@@ -48,6 +53,4 @@ public class MainActivity extends AppCompatActivity {
 
 /** Notes:
  *  1. MainRecyclerViewAdapter is necessary to display the list to the main menu.
- *
- *
  * */

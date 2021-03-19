@@ -15,7 +15,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     Context context;
     String[] items, descriptions;
 
-
+    /** Constructor */
     public MainRecyclerViewAdapter(Context context, String[] items, String[] descriptions) {
         this.context = context;
         this.items = items;
@@ -23,6 +23,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     }
 
 
+    /** Initialize a row of of recycler view. */
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -31,17 +32,19 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
         return new MyViewHolder(view);
     }
 
+    /** Set the title name. */
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.title.setText(items[position]);
-
     }
 
+    /** This method displays the number of items in the recycler view. */
     @Override
     public int getItemCount() {
         return items.length;
     }
 
+    /**  Initialize title, imgDot, imgTrashCan by their IDs. */
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView title;
