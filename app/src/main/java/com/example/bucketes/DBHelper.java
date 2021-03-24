@@ -2,20 +2,26 @@ package com.example.bucketes;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
-    public static final String DBNAME = "Login.db";
+    public static final String DB_NAME = "users.db";
+    public static final String USERS_TABLE = "users_table";
+    public static final String COL_USERNAME = "username";
+    public static final String COL_PASSWORD = "password";
 
     public DBHelper(Context context) {
-        super(context, "Login.db", null, 1);
+        super(context, DB_NAME, null, 1);
     }
 
+    // this is called the first time a database is accessed
+    // this creates a new database
     @Override
     public void onCreate(SQLiteDatabase MyDB) {
-        MyDB.execSQL("create Table users(username TEXT primary key, password TEXT)");
+        String createStatementTable = "create table " + USERS_TABLE + " (" + COL_USERNAME + " text primary key, " + COL_PASSWORD + " text)";
+
+        MyDB.execSQL(createStatementTable);
     }
 
     @Override
@@ -23,32 +29,22 @@ public class DBHelper extends SQLiteOpenHelper {
         MyDB.execSQL("drop Table if exists users");
     }
 
-    public Boolean insertData(String username, String password){
-        SQLiteDatabase MyDB = this.getWritableDatabase();
-        ContentValues contentValues= new ContentValues();
-        contentValues.put("username", username);
-        contentValues.put("password", password);
-        long result = MyDB.insert("users", null, contentValues);
-        if(result==-1) return false;
+    public boolean addUser(UserModel userModel) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues cv = new ContentValues(); // this works similar to a hashmap with keys and values
+        cv.put(COL_USERNAME, userModel.getUsername());
+        cv.put(COL_PASSWORD, userModel.getPassword());
+
+        long insert = db.insert(USERS_TABLE, null, cv);
+
+
+        // -1 = fails to insert
+        if (insert == -1)
+            return false;
         else
             return true;
+
     }
 
-    public Boolean checkusername(String username) {
-        SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select * from users where username = ?", new String[]{username});
-        if (cursor.getCount() > 0)
-            return true;
-        else
-            return false;
-    }
-
-    public Boolean checkusernamepassword(String username, String password){
-        SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select * from users where username = ? and password = ?", new String[] {username,password});
-        if(cursor.getCount()>0)
-            return true;
-        else
-            return false;
-    }
 }

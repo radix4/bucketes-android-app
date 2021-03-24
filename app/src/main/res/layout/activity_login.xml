@@ -74,7 +74,7 @@
         app:layout_constraintVertical_bias="0.23000002" />
 
     <TextView
-        android:id="@+id/linkToRegistration"
+        android:id="@+id/tvLinkToActivityRegistration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Not registered? Register Here "

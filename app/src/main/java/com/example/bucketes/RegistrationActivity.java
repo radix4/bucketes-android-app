@@ -17,110 +17,68 @@ import com.google.android.material.snackbar.Snackbar;
 public class RegistrationActivity extends AppCompatActivity {
     private static String TAG = "RegistrationActivity";
 
-    private EditText edtTxtName, edtTxtPassword1, edtTxtPassword2, txtWarnPassword1, txtWarnPassword2;
-    private Button btnRegister;
-    private TextView txtWarnName, loginLink;
+    private EditText txtWarnPassword1, txtWarnPassword2;
+    private TextView txtWarnName;
     private ConstraintLayout parent;
-    String name;
-    String password1;
-    String password2;
-    DBHelper DB;
+
+    private TextView tvLinkToActivityLogin;
+    private EditText etUsername, etPassword, etConfirmPassword;
+    private Button btnRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        initViews();
+        // initialize variables
+        btnRegister = findViewById(R.id.btnRegister);
+        etUsername = findViewById(R.id.etUsername);
+        etPassword = findViewById(R.id.etPassword);
+        etConfirmPassword = findViewById(R.id.etConfirmPassword);
 
+
+        /* this button registers the user*/
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initRegistration();
+                DBHelper dbHelper = new DBHelper(RegistrationActivity.this);
+                UserModel userModel;
+
+                try {
+                    userModel = new UserModel(etUsername.getText().toString(), etPassword.getText().toString());
+                } catch (Exception e) {
+                    userModel = new UserModel("error", "error");
+                    Toast.makeText(RegistrationActivity.this, "Error create user", Toast.LENGTH_SHORT).show();
+                }
+
+
+                // check password == confirm password
+                if (etPassword.getText().toString().equals(etConfirmPassword.getText().toString())) {
+                    boolean success = dbHelper.addUser(userModel);
+
+                    // toasts to validate user creation
+                    if (success)
+                        Toast.makeText(RegistrationActivity.this, "Create user success", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(RegistrationActivity.this, "Error create user", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    Toast.makeText(RegistrationActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();;
+                }
+
+
+
             }
         });
 
-        loginLink.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
-        });
+        // tvLinkToActivityLogin.setOnClickListener(new View.OnClickListener(){
+        //     public void onClick(View v){
+        //         Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
+        //         startActivity(intent);
+        //     }
+        // });
     }
 
-    private void initRegistration() {
-        Log.d(TAG, "initRegistration: Started");
 
-        if (validateData()) {
-            DB.insertData(name, password1);
-            Toast.makeText(RegistrationActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(intent);
-        }
-        else
-            Toast.makeText(RegistrationActivity.this, "Registration failed", Toast.LENGTH_SHORT).show();
-    }
-
-    private boolean validateData() {
-        Log.d(TAG, "validateData: Started");
-
-        // Check if any fields are empty
-        if (edtTxtName.getText().toString().equals("") || edtTxtPassword1.getText().toString().equals("")
-                || edtTxtPassword2.getText().toString().equals("")) {
-            if (edtTxtName.getText().toString().equals("")) {
-                txtWarnName.setVisibility(View.VISIBLE);
-                txtWarnName.setText("Enter Name");
-            }
-            if (edtTxtPassword1.getText().toString().equals("")) {
-                txtWarnPassword1.setVisibility(View.VISIBLE);
-                txtWarnPassword1.setText("Enter Password");
-            }
-            if (edtTxtPassword2.getText().toString().equals("")) {
-                txtWarnPassword2.setVisibility(View.VISIBLE);
-                txtWarnPassword2.setText("Enter Password");
-            }
-            return false;
-        }
-
-        // Check if user already exists
-        if (DB.checkusername(name) == true) {
-            Toast.makeText(RegistrationActivity.this, "User already exists! Please sign in", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        // Check if passwords match
-        if (!password1.equals(password2)) {
-            Toast.makeText(RegistrationActivity.this, "Passwords don't match", Toast.LENGTH_SHORT).show();
-            txtWarnPassword1.setVisibility(View.VISIBLE);
-            txtWarnPassword2.setVisibility(View.VISIBLE);
-            txtWarnPassword1.setText("Passwords don't match");
-            txtWarnPassword2.setText("Passwords don't match");
-            return false;
-        }
-
-        return true;
-    }
-
-    private void initViews() {
-        Log.d(TAG, "initViews: Started");
-
-        edtTxtName = findViewById(R.id.editTextNameR);
-        edtTxtPassword1 = findViewById(R.id.editTextPassword1R);
-        edtTxtPassword2 = findViewById(R.id.editTextPassword2R);
-
-        name = edtTxtName.getText().toString();
-        password1 = edtTxtPassword1.getText().toString();
-        password2 = edtTxtPassword2.getText().toString();
-
-        btnRegister = findViewById(R.id.registerButton);
-        loginLink = findViewById(R.id.loginLink);
-
-        txtWarnName = findViewById(R.id.textWarnNameR);
-        txtWarnPassword1 = findViewById(R.id.textWarnPassword1R);
-        txtWarnPassword2 = findViewById(R.id.textWarnPassword2R);
-
-        parent = findViewById(R.id.parent1);
-        DB = new DBHelper(this);
-    }
 
 }

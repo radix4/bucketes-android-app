@@ -19,29 +19,20 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText edtTxtName, edtTxtPassword;
     private Button btnLogin;
-    private TextView txtWarnName,txtWarnPassword, registrationLink;
+    private TextView txtWarnName,txtWarnPassword;
     private ConstraintLayout parent;
     DBHelper DB;
+
+    private TextView tvLinkToActivityRegistration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        initViews();
+        tvLinkToActivityRegistration = findViewById(R.id.tvLinkToActivityRegistration);
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (initLogin()) {
-                    // upon click, changes to main activity
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                }
-            }
-        });
-
-        registrationLink.setOnClickListener(new View.OnClickListener() {
+        tvLinkToActivityRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
@@ -50,68 +41,4 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private boolean initLogin() {
-        Log.d(TAG, "initLogin: Started");
-
-        if (validateData()) {
-            showSnackBar();
-            return true;
-        }
-
-        return false;
-    }
-
-    private void showSnackBar() {
-        Log.d(TAG, "showSnackBar: Started");
-        txtWarnName.setVisibility(View.GONE);
-        txtWarnPassword.setVisibility(View.GONE);
-
-        Snackbar.make(parent, "Login Successful", 1000);
-    }
-
-    private boolean validateData() {
-        Log.d(TAG, "validateData: Started");
-
-        String name = edtTxtName.getText().toString();
-        String password = edtTxtPassword.getText().toString();
-
-        if (name.equals("") || password.equals("")) {
-            if (name.equals("")) {
-                txtWarnName.setVisibility(View.VISIBLE);
-                txtWarnName.setText("Enter Name");
-            }
-            if (password.equals("")) {
-                txtWarnPassword.setVisibility(View.VISIBLE);
-                txtWarnPassword.setText("Enter Password");
-            }
-            return false;
-        }
-
-        // Check with database
-        Boolean checkUserPW = DB.checkusernamepassword(name, password);
-        if(checkUserPW) {
-            showSnackBar();
-            return true;
-        } else {
-            Toast.makeText(LoginActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
-        }
-
-        return false;
-    }
-
-    private void initViews() {
-        Log.d(TAG, "initViews: Started");
-
-        edtTxtName = findViewById(R.id.editTextNameS);
-        edtTxtPassword = findViewById(R.id.editTextPasswordS);
-
-        btnLogin = findViewById(R.id.loginButton);
-        registrationLink = findViewById(R.id.linkToRegistration);
-
-        txtWarnName = findViewById(R.id.textWarnNameS);
-        txtWarnPassword = findViewById(R.id.textWarnPasswordS);
-
-        parent = findViewById(R.id.parent1);
-        DB = new DBHelper(this);
-    }
 }
