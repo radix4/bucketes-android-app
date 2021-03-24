@@ -8,7 +8,7 @@
     tools:context=".LoginActivity">
 
     <EditText
-        android:id="@+id/editTextNameS"
+        android:id="@+id/etLoginUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
@@ -18,6 +18,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/rectangle" />
+
+    <EditText
+        android:id="@+id/etLoginPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="@+id/rectangle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etLoginUsername" />
 
     <TextView
         android:id="@+id/welcomeTextS"
@@ -46,20 +58,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/component1" />
 
-    <EditText
-        android:id="@+id/editTextPasswordS"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="@+id/rectangle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNameS" />
-
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/btnLogin"
         style="@style/AppTheme.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
         app:layout_constraintBottom_toTopOf="@+id/image2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin"
         app:layout_constraintVertical_bias="0.44" />
 
     <ImageView
@@ -101,10 +101,10 @@
         android:text="Enter Name"
         android:textColor="@android:color/holo_red_dark"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/editTextNameS"
-        app:layout_constraintEnd_toEndOf="@+id/editTextNameS"
+        app:layout_constraintBottom_toTopOf="@+id/etLoginUsername"
+        app:layout_constraintEnd_toEndOf="@+id/etLoginUsername"
         app:layout_constraintHorizontal_bias="0.15"
-        app:layout_constraintStart_toStartOf="@+id/editTextNameS" />
+        app:layout_constraintStart_toStartOf="@+id/etLoginUsername" />
 
     <TextView
         android:id="@+id/textWarnPasswordS"
@@ -113,10 +113,10 @@
         android:text="Enter Password"
         android:textColor="@android:color/holo_red_dark"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/editTextPasswordS"
-        app:layout_constraintEnd_toEndOf="@+id/editTextPasswordS"
+        app:layout_constraintBottom_toTopOf="@+id/etLoginPassword"
+        app:layout_constraintEnd_toEndOf="@+id/etLoginPassword"
         app:layout_constraintHorizontal_bias="0.15"
-        app:layout_constraintStart_toStartOf="@+id/editTextPasswordS" />
+        app:layout_constraintStart_toStartOf="@+id/etLoginPassword" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"

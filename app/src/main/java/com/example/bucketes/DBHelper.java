@@ -2,8 +2,10 @@ package com.example.bucketes;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DBHelper extends SQLiteOpenHelper {
     public static final String DB_NAME = "users.db";
@@ -45,6 +47,38 @@ public class DBHelper extends SQLiteOpenHelper {
         else
             return true;
 
+    }
+
+    public boolean validateUser(UserModel userModel) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // select * from users_table where username=""
+        String queryString = "select * from " + USERS_TABLE + " where " + COL_USERNAME + "= ?";
+        Cursor cursor = db.rawQuery(queryString, new String[]{userModel.getUsername()});       // cursor is the result set from a SQL statement
+
+
+        Log.d("COUNT", "validateUser: " + cursor.getCount());
+        if (cursor.moveToFirst()) {       // found something
+            String password = cursor.getString(1);
+            Log.d("DBHelper", "cursor password: " + cursor.getString(1));
+
+            if (userModel.getPassword().equals(password)) {     // check if password matches from db
+                cursor.close();
+                db.close();
+                return true;
+            } else {
+                cursor.close();
+                db.close();
+                return false;
+            }
+        } else {
+            Log.d("DBHelper", "Cursor fail!");
+        }
+
+        // very important to close the cursor and db when done
+        cursor.close();
+        db.close();
+        return false;
     }
 
 }

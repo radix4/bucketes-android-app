@@ -14,7 +14,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginLink"
+        app:layout_constraintTop_toBottomOf="@+id/etLinkToActivityLogin"
         app:srcCompat="@drawable/component2" />
 
     <TextView
@@ -43,7 +43,7 @@
         app:srcCompat="@drawable/component3" />
 
     <EditText
-        android:id="@+id/etUsername"
+        android:id="@+id/etRegisterUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
@@ -55,7 +55,7 @@
         app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
     <EditText
-        android:id="@+id/etPassword"
+        android:id="@+id/etRegisterPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -63,13 +63,13 @@
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/etConfirmPassword"
-        app:layout_constraintEnd_toEndOf="@+id/etUsername"
-        app:layout_constraintStart_toStartOf="@+id/etUsername"
-        app:layout_constraintTop_toBottomOf="@+id/etUsername" />
+        app:layout_constraintBottom_toTopOf="@+id/etRegisterConfirmPassword"
+        app:layout_constraintEnd_toEndOf="@+id/etRegisterUsername"
+        app:layout_constraintStart_toStartOf="@+id/etRegisterUsername"
+        app:layout_constraintTop_toBottomOf="@+id/etRegisterUsername" />
 
     <EditText
-        android:id="@+id/etConfirmPassword"
+        android:id="@+id/etRegisterConfirmPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
@@ -77,9 +77,9 @@
         android:hint="Confirm Password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-        app:layout_constraintEnd_toEndOf="@+id/etPassword"
-        app:layout_constraintStart_toStartOf="@+id/etPassword"
-        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+        app:layout_constraintEnd_toEndOf="@+id/etRegisterPassword"
+        app:layout_constraintStart_toStartOf="@+id/etRegisterPassword"
+        app:layout_constraintTop_toBottomOf="@+id/etRegisterPassword" />
 
     <Button
         android:id="@+id/btnRegister"
@@ -110,10 +110,10 @@
         android:text="Enter Name"
         android:textColor="@android:color/holo_red_dark"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/etUsername"
-        app:layout_constraintEnd_toEndOf="@+id/etUsername"
+        app:layout_constraintBottom_toTopOf="@+id/etRegisterUsername"
+        app:layout_constraintEnd_toEndOf="@+id/etRegisterUsername"
         app:layout_constraintHorizontal_bias="0.15"
-        app:layout_constraintStart_toStartOf="@+id/etUsername" />
+        app:layout_constraintStart_toStartOf="@+id/etRegisterUsername" />
 
     <EditText
         android:id="@+id/textWarnPassword1R"
@@ -123,10 +123,10 @@
         android:textColor="@android:color/holo_red_dark"
         android:textSize="14sp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/etPassword"
-        app:layout_constraintEnd_toEndOf="@+id/etPassword"
+        app:layout_constraintBottom_toTopOf="@+id/etRegisterPassword"
+        app:layout_constraintEnd_toEndOf="@+id/etRegisterPassword"
         app:layout_constraintHorizontal_bias="0.15"
-        app:layout_constraintStart_toStartOf="@+id/etPassword" />
+        app:layout_constraintStart_toStartOf="@+id/etRegisterPassword" />
 
     <EditText
         android:id="@+id/textWarnPassword2R"
@@ -136,13 +136,13 @@
         android:textColor="@android:color/holo_red_dark"
         android:textSize="14sp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/etConfirmPassword"
-        app:layout_constraintEnd_toEndOf="@+id/etConfirmPassword"
+        app:layout_constraintBottom_toTopOf="@+id/etRegisterConfirmPassword"
+        app:layout_constraintEnd_toEndOf="@+id/etRegisterConfirmPassword"
         app:layout_constraintHorizontal_bias="0.15"
-        app:layout_constraintStart_toStartOf="@+id/etConfirmPassword" />
+        app:layout_constraintStart_toStartOf="@+id/etRegisterConfirmPassword" />
 
     <TextView
-        android:id="@+id/loginLink"
+        android:id="@+id/etLinkToActivityLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"

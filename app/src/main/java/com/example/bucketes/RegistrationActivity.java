@@ -32,9 +32,10 @@ public class RegistrationActivity extends AppCompatActivity {
 
         // initialize variables
         btnRegister = findViewById(R.id.btnRegister);
-        etUsername = findViewById(R.id.etUsername);
-        etPassword = findViewById(R.id.etPassword);
-        etConfirmPassword = findViewById(R.id.etConfirmPassword);
+        etUsername = findViewById(R.id.etRegisterUsername);
+        etPassword = findViewById(R.id.etRegisterPassword);
+        etConfirmPassword = findViewById(R.id.etRegisterConfirmPassword);
+        tvLinkToActivityLogin = findViewById(R.id.etLinkToActivityLogin);
 
 
         /* this button registers the user*/
@@ -44,6 +45,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 DBHelper dbHelper = new DBHelper(RegistrationActivity.this);
                 UserModel userModel;
 
+                // attempt to instantiate user
                 try {
                     userModel = new UserModel(etUsername.getText().toString(), etPassword.getText().toString());
                 } catch (Exception e) {
@@ -71,12 +73,13 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
-        // tvLinkToActivityLogin.setOnClickListener(new View.OnClickListener(){
-        //     public void onClick(View v){
-        //         Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
-        //         startActivity(intent);
-        //     }
-        // });
+        // upon click switches to Activity Login
+        tvLinkToActivityLogin.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
