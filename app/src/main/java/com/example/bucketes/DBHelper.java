@@ -7,7 +7,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.bucketes.models.ItemModel;
 import com.example.bucketes.models.UserModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
     public static final String DB_NAME = "users.db";
@@ -68,36 +72,6 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * This function inserts the UserModel into the database.
-     * */
-    public boolean addUser(UserModel userModel) {
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues cv = new ContentValues(); // ContentValues works similar to a hashmap with keys and values
-        cv.put(COL_USERNAME, userModel.getUsername());
-        cv.put(COL_PASSWORD, userModel.getPassword());
-
-        long insert = db.insert(USERS_TABLE, null, cv);
-
-        /* ==== test 2nd table ====
-        * Status: success */
-        ContentValues cv2 = new ContentValues();
-        cv2.put(COL_USERNAME, "test");
-        cv2.put(COL_TITLE, "test");
-        cv2.put(COL_STORY, "test");
-        cv2.put(COL_COMPLETION_DATE, "test");
-        cv2.put(COL_STATUS, "test");
-        long insert2 = db.insert(ITEMS_TABLE, null, cv2);
-        /* ==== test 2nd table ==== */
-
-        // -1 = fails to insert
-        if (insert == -1)
-            return false;
-        else
-            return true;
-    }
-
-    /**
      * This function validates if the UserModel entered by the user matches with the
      * data in the database.
      * */
@@ -133,4 +107,75 @@ public class DBHelper extends SQLiteOpenHelper {
         return false;
     }
 
+    /**
+     * This function inserts the UserModel into the database.
+     * */
+    public boolean addUser(UserModel userModel) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues cv = new ContentValues(); // ContentValues works similar to a hashmap with keys and values
+        cv.put(COL_USERNAME, userModel.getUsername());
+        cv.put(COL_PASSWORD, userModel.getPassword());
+
+        long insert = db.insert(USERS_TABLE, null, cv);
+
+        db.close();
+
+        return insert != -1;
+    }
+
+    /**
+    * This function inserts the ItemModel into the database.
+    * */
+    public boolean addItem(ItemModel item) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+
+        /* item's username and title must have */
+        cv.put(COL_USERNAME, item.getUsername());
+        cv.put(COL_TITLE, item.getTitle());
+
+        /* item's story, completion date, and status can be updated later */
+        if (item.getStory() != null) cv.put(COL_STORY, item.getStory());
+        if (item.getCompletionDate() != null) cv.put(COL_COMPLETION_DATE, item.getCompletionDate());
+        if (item.getStatus() != null) cv.put(COL_STATUS, item.getStatus());
+
+        long insert = db.insert(ITEMS_TABLE, null, cv);
+
+        db.close();
+
+        return insert != -1;
+    }
+
+    /**
+     * This function checks the database for the given user
+     * and return the user's list of items.
+     */
+    public List<ItemModel> getItems(UserModel user) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        List<ItemModel> items = new ArrayList<>();
+
+        String query = "select * from " + USERS_TABLE + " natural join "  + ITEMS_TABLE + " where " + COL_USERNAME + "=" + user.getUsername();
+        Cursor cursor = db.rawQuery(query, null);
+
+
+        if (cursor.moveToFirst()) {
+            do {
+                /* table order: id, username, title, story, completion date, status */
+                String username = cursor.getColumnName(1);
+                String title = cursor.getColumnName(2);
+                String story = cursor.getColumnName(3);
+                String completionDate = cursor.getColumnName(4);
+                String status = cursor.getColumnName(5);
+
+                ItemModel item = new ItemModel(username, title, story, completionDate, status);
+                items.add(item);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return items;
+    }
 }
