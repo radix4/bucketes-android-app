@@ -21,6 +21,8 @@ public class LoginActivity extends AppCompatActivity {
     private ConstraintLayout parent;
     DBHelper DB;
 
+    public static UserModel user;
+
     // initialize variables
     private TextView tvLinkToActivityRegistration;
     private EditText etUsername, etPassword;
@@ -31,10 +33,14 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        /* initialize views by id */
         etUsername = findViewById(R.id.etLoginUsername);
         etPassword = findViewById(R.id.etLoginPassword);
         btnLogin = findViewById(R.id.btnLogin);
         tvLinkToActivityRegistration = findViewById(R.id.tvLinkToActivityRegistration);
+
+        /* instantiate user */
+        user = new UserModel(etUsername.getText().toString(), etPassword.getText().toString());
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
                 UserModel userModel;
 
 
-                // attempt to instantiate user
+                /* attempt to instantiate user */
                 try {
                     userModel = new UserModel(etUsername.getText().toString(), etPassword.getText().toString());
                 } catch (Exception e) {

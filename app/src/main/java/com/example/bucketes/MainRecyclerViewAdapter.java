@@ -10,16 +10,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerViewAdapter.MyViewHolder> {
 
     Context context;
-    String[] items, descriptions;
+    private List<ItemModel> items;
 
     /** Constructor */
-    public MainRecyclerViewAdapter(Context context, String[] items, String[] descriptions) {
+    public MainRecyclerViewAdapter(Context context, List<ItemModel> items) {
         this.context = context;
         this.items = items;
-        this.descriptions = descriptions;
     }
 
 
@@ -35,13 +37,13 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     /** Set the title name. */
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.title.setText(items[position]);
+        holder.title.setText(items.get(position).getTitle());
     }
 
     /** This method displays the number of items in the recycler view. */
     @Override
     public int getItemCount() {
-        return items.length;
+        return items.size();
     }
 
     /**  Initialize title, imgDot, imgTrashCan by their IDs. */

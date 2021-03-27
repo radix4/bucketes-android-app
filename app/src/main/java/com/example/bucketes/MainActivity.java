@@ -7,28 +7,47 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.widget.EditText;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView mainRecyclerView;
 
-    // items here will be changed to a data structure such as ArrayList
-    String[] items, descriptions;
+    private UserModel user;
+    private ArrayList<ItemModel> items;
+
+
+    private EditText etUsername, etPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // initialize string arrays from strings.xml
-        items = getResources().getStringArray(R.array.items);
-        descriptions = getResources().getStringArray(R.array.descriptions);
+        /* initialize views by id */
+        etUsername = findViewById(R.id.etLoginUsername);
+        etPassword = findViewById(R.id.etLoginPassword);
+
+
+        user = LoginActivity.user;
+        items = new ArrayList<>();
+
+        /* test dynamic items */
+        ItemModel item = new ItemModel("test", "test", "test", "test", "test");
+        ItemModel item1 = new ItemModel("test1", "test1", "test1", "test1", "test1");
+        ItemModel item2 = new ItemModel("test2", "test2", "test2", "test2", "test2");
+
+        items.add(item);
+        items.add(item1);
+        items.add(item2);
 
         // find recycler view from activity_main.xml
         mainRecyclerView = findViewById(R.id.mainRecyclerView);
 
         // recycler view needs to set adapter to display the list to the screen
-        MainRecyclerViewAdapter mainAdapter = new MainRecyclerViewAdapter(this, items, descriptions);
+        MainRecyclerViewAdapter mainAdapter = new MainRecyclerViewAdapter(this, items);
         mainRecyclerView.setAdapter(mainAdapter);
         mainRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
