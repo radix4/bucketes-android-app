@@ -1,4 +1,4 @@
-package com.example.bucketes;
+package com.example.bucketes.models;
 
 public class ItemModel {
     private String username; /* reference to the user that this item belongs to */

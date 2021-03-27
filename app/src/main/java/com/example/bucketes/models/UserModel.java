@@ -1,4 +1,4 @@
-package com.example.bucketes;
+package com.example.bucketes.models;
 
 import java.util.List;
 

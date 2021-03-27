@@ -9,6 +9,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.EditText;
 
+import com.example.bucketes.models.ItemModel;
+import com.example.bucketes.models.UserModel;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {

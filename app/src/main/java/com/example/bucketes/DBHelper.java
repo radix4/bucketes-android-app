@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.bucketes.models.UserModel;
+
 public class DBHelper extends SQLiteOpenHelper {
     public static final String DB_NAME = "users.db";
     public static final String USERS_TABLE = "users_table";
