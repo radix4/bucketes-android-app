@@ -10,7 +10,6 @@ import android.view.MenuInflater;
 
 public class MainActivity extends AppCompatActivity {
 
-
     RecyclerView mainRecyclerView;
 
     // items here will be changed to a data structure such as ArrayList
