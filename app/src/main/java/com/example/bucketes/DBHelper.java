@@ -17,6 +17,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COL_STORY = "story";
     public static final String COL_COMPLETION_DATE = "completion_date";
     public static final String COL_STATUS = "status";
+    public static final String ITEMS_TABLE = "items_table";
 
     /**
      * This function creates the database if the database has not been created.
@@ -37,7 +38,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         COL_PASSWORD + " text)";
 
         String createItemsTableStatement =
-                "create table items_table (" +
+                "create table " + ITEMS_TABLE + " (" +
                         COL_ITEM_ID + " integer, " +
                         COL_USERNAME + " text, " +
                         COL_TITLE + " text, " +
@@ -45,7 +46,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         COL_COMPLETION_DATE + " text, " +
                         COL_STATUS + " text, " +
                         "primary key (" + COL_ITEM_ID + "), " +
-                        "foreign key (" + COL_USERNAME + ") references " + USERS_TABLE;
+                        "foreign key (" + COL_USERNAME + ") references " + USERS_TABLE + ")";
 
 
         /* create 2 tables into the db */
@@ -53,12 +54,16 @@ public class DBHelper extends SQLiteOpenHelper {
         MyDB.execSQL(createItemsTableStatement);
     }
 
-    // TODO: add comments
+    /**
+     * On upgrade, drop older tables and create new tables.
+     * */
     @Override
     public void onUpgrade(SQLiteDatabase MyDB, int i, int i1) {
-        MyDB.execSQL("drop Table if exists users");
-    }
+        MyDB.execSQL("drop table if exists " + USERS_TABLE);
+        MyDB.execSQL("drop table if exists " + ITEMS_TABLE);
 
+        onCreate(MyDB);
+    }
 
     /**
      * This function inserts the UserModel into the database.
@@ -72,6 +77,16 @@ public class DBHelper extends SQLiteOpenHelper {
 
         long insert = db.insert(USERS_TABLE, null, cv);
 
+        /* ==== test 2nd table ====
+        * Status: success */
+        ContentValues cv2 = new ContentValues();
+        cv2.put(COL_USERNAME, "test");
+        cv2.put(COL_TITLE, "test");
+        cv2.put(COL_STORY, "test");
+        cv2.put(COL_COMPLETION_DATE, "test");
+        cv2.put(COL_STATUS, "test");
+        long insert2 = db.insert(ITEMS_TABLE, null, cv2);
+        /* ==== test 2nd table ==== */
 
         // -1 = fails to insert
         if (insert == -1)
