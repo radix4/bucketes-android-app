@@ -4,13 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.bucketes.models.ItemModel;
 import com.example.bucketes.models.UserModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -23,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     private EditText etUsername, etPassword;
+    private Dialog addItemDialog;
+    private FloatingActionButton btnAddItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         /* initialize views by id */
         etUsername = findViewById(R.id.etLoginUsername);
         etPassword = findViewById(R.id.etLoginPassword);
+        btnAddItem = findViewById(R.id.btnAddItem);
+        addItemDialog = new Dialog(this);
 
 
         user = LoginActivity.user;
@@ -44,7 +54,18 @@ public class MainActivity extends AppCompatActivity {
 
         items.add(item);
         items.add(item1);
-        items.add(item2);
+
+
+        btnAddItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addItemDialog.setContentView(R.layout.add_item_popup);
+                addItemDialog.show();
+            }
+        });
+
+
+
 
         // find recycler view from activity_main.xml
         mainRecyclerView = findViewById(R.id.mainRecyclerView);
