@@ -20,7 +20,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private TextView txtWarnName;
     private ConstraintLayout parent;
 
-    private TextView tvLinkToActivityLogin;
+    private TextView tvLinkToActivityLogin, WarnName, WarnPassword1, WarnPassword2;
     private EditText etUsername, etPassword, etConfirmPassword;
     private Button btnRegister;
 
@@ -35,6 +35,10 @@ public class RegistrationActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etRegisterPassword);
         etConfirmPassword = findViewById(R.id.etRegisterConfirmPassword);
         tvLinkToActivityLogin = findViewById(R.id.etLinkToActivityLogin);
+        WarnName = findViewById(R.id.textWarnNameR);
+        WarnPassword1 = findViewById(R.id.textWarnPassword1R);
+        WarnPassword2 = findViewById(R.id.textWarnPassword2R);
+
 
 
         /* this button registers the user*/
@@ -49,26 +53,51 @@ public class RegistrationActivity extends AppCompatActivity {
                     userModel = new UserModel(etUsername.getText().toString(), etPassword.getText().toString());
                 } catch (Exception e) {
                     userModel = new UserModel("error", "error");
+
+                    // No name entered
+                    if (etUsername.getText().toString().equals("")) {
+                        txtWarnName.setText("Enter Name");
+                        txtWarnName.setVisibility(View.VISIBLE);
+                    }
                     Toast.makeText(RegistrationActivity.this, "Error create user", Toast.LENGTH_SHORT).show();
                 }
-
 
                 // check password == confirm password
                 if (etPassword.getText().toString().equals(etConfirmPassword.getText().toString())) {
                     boolean success = dbHelper.addUser(userModel);
 
                     // toasts to validate user creation
-                    if (success)
-                        Toast.makeText(RegistrationActivity.this, "Create user success", Toast.LENGTH_SHORT).show();
+                    if (success) {
+                        Toast.makeText(RegistrationActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    }
                     else
-                        Toast.makeText(RegistrationActivity.this, "Error create user", Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(RegistrationActivity.this, "Error creating user", Toast.LENGTH_SHORT).show();
                 } else {
+                    if (etPassword.getText().toString().equals("") || etConfirmPassword.getText().toString().equals("")) {
+
+                        // No password entered
+                        if (etPassword.getText().toString().equals("")) {
+                            txtWarnPassword1.setText("Enter Password");
+                            txtWarnPassword1.setVisibility(View.VISIBLE);
+                        }
+
+                        // Password is not confirmed
+                        if (etPassword.getText().toString().equals("")) {
+                            txtWarnPassword2.setText("Confirm Password");
+                            txtWarnPassword2.setVisibility(View.VISIBLE);
+                        }
+                    }
+
+                    else {
+                        WarnPassword1.setText("Passwords don't match");
+                        WarnPassword2.setText("Passwords don't match");
+                        WarnPassword1.setVisibility(View.VISIBLE);
+                        WarnPassword2.setVisibility(View.VISIBLE);
+                    }
                     Toast.makeText(RegistrationActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();;
                 }
-
-
-
             }
         });
 
@@ -80,7 +109,4 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
 }

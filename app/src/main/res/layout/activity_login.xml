@@ -100,10 +100,11 @@
         android:layout_height="wrap_content"
         android:text="Enter Name"
         android:textColor="@android:color/holo_red_dark"
+        android:textSize="12sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/etLoginUsername"
         app:layout_constraintEnd_toEndOf="@+id/etLoginUsername"
-        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintHorizontal_bias="0.03"
         app:layout_constraintStart_toStartOf="@+id/etLoginUsername" />
 
     <TextView
@@ -112,10 +113,11 @@
         android:layout_height="wrap_content"
         android:text="Enter Password"
         android:textColor="@android:color/holo_red_dark"
+        android:textSize="12sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/etLoginPassword"
         app:layout_constraintEnd_toEndOf="@+id/etLoginPassword"
-        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintHorizontal_bias="0.03"
         app:layout_constraintStart_toStartOf="@+id/etLoginPassword" />
 
     <androidx.constraintlayout.widget.Guideline
