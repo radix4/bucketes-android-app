@@ -12,10 +12,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="140dp"
         android:orientation="horizontal"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="-242dp">
+        tools:layout_editor_absoluteY="-42dp">
 
         <RadioButton
             android:id="@+id/planned"
@@ -49,7 +49,7 @@
         android:layout_height="395dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="81dp"
+        android:layout_marginBottom="215dp"
         android:autofillHints="true"
         android:background="@drawable/border"
         android:ems="10"
@@ -75,18 +75,12 @@
         android:inputType="textPersonName"
         android:paddingLeft="15dp" />
 
-    <EditText
-        android:id="@+id/competionDate"
-        android:layout_width="296dp"
-        android:layout_height="57dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="112dp"
-        android:background="@drawable/border"
-        android:ems="10"
-        android:hint="Completion Date (MM/DD/YYYY)"
-        android:inputType="date"
-        android:paddingLeft="15dp" />
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+         />
 
 
 </RelativeLayout>
