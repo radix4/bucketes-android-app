@@ -52,6 +52,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/rectangle"
-        android:background="transparent"/>
+        android:background="@null"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
