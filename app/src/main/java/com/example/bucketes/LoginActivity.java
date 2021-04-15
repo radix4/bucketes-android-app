@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         /* instantiate user */
         user = new UserModel(etUsername.getText().toString(), etPassword.getText().toString());
 
+        /* ===== login ===== */
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
