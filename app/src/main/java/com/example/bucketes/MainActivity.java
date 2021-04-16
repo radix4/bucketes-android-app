@@ -12,13 +12,14 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.bucketes.dialogs.LogoutDialog;
 import com.example.bucketes.models.Item;
 import com.example.bucketes.models.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements Dialog.CustomDialogListener {
+public class MainActivity extends AppCompatActivity implements LogoutDialog.CustomDialogListener {
 
     RecyclerView mainRecyclerView;
 
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements Dialog.CustomDial
 
     /** This function opens up the menu logout dialog. */
     public void openDialog() {
-        com.example.bucketes.Dialog logout = new com.example.bucketes.Dialog();
+        LogoutDialog logout = new LogoutDialog();
         logout.show(getSupportFragmentManager(), "Logout Dialog");
     }
 
