@@ -9,9 +9,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.bucketes.dialogs.AddItemDialog;
 import com.example.bucketes.dialogs.LogoutDialog;
 import com.example.bucketes.models.Item;
 import com.example.bucketes.models.User;
@@ -19,7 +21,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements LogoutDialog.CustomDialogListener {
+public class MainActivity extends AppCompatActivity implements LogoutDialog.CustomDialogListener, AddItemDialog.CustomDialogListener {
 
     RecyclerView mainRecyclerView;
 
@@ -39,6 +41,13 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
         etUsername = findViewById(R.id.etLoginUsername);
         etPassword = findViewById(R.id.etLoginPassword);
         btnAddItem = findViewById(R.id.btnAddItem);
+
+        btnAddItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleBtnAddItem();
+            }
+        });
 
         items = new ArrayList<>();
 
@@ -75,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
         switch (item.getItemId()) {
             case R.id.btnMenuLogout:
                 Toast.makeText(MainActivity.this, "Logout clicked", Toast.LENGTH_SHORT).show();
-                openDialog();
+                openLogoutDialog();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -83,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
     }
 
     /** This function opens up the menu logout dialog. */
-    public void openDialog() {
+    public void openLogoutDialog() {
         LogoutDialog logout = new LogoutDialog();
         logout.show(getSupportFragmentManager(), "Logout Dialog");
     }
@@ -94,6 +103,22 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
     }
+
+    /** This function opens up the add item dialog. */
+    public void openAddItemDialog() {
+        AddItemDialog dialog = new AddItemDialog();
+        dialog.show(getSupportFragmentManager(), "Add Item Dialog");
+    }
+
+    @Override
+    public void addItem(Item item) {
+
+    }
+
+    public void handleBtnAddItem() {
+        openAddItemDialog();
+    }
+
 }
 
 
