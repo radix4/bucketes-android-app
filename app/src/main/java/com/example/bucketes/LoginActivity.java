@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.bucketes.models.UserModel;
+import com.example.bucketes.models.User;
 
 public class LoginActivity extends AppCompatActivity {
     private static String TAG = "LoginActivity";
@@ -20,7 +20,7 @@ public class LoginActivity extends AppCompatActivity {
     private ConstraintLayout parent;
     DBHelper DB;
 
-    public static UserModel user;
+    public static User user;
 
     // initialize variables
     private TextView tvLinkToActivityRegistration, WarnName, WarnPassword;
@@ -41,24 +41,24 @@ public class LoginActivity extends AppCompatActivity {
         WarnPassword = findViewById(R.id.textWarnPasswordS);
 
         /* instantiate user */
-        user = new UserModel(etUsername.getText().toString(), etPassword.getText().toString());
+        user = new User(etUsername.getText().toString(), etPassword.getText().toString());
 
         /* ===== login ===== */
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DBHelper dbHelper = new DBHelper(LoginActivity.this);   // create reference to db
-                UserModel userModel;
+                User user;
 
                 /* attempt to instantiate user */
                 try {
-                    userModel = new UserModel(etUsername.getText().toString(), etPassword.getText().toString());
+                    user = new User(etUsername.getText().toString(), etPassword.getText().toString());
                 } catch (Exception e) {
-                    userModel = new UserModel("error", "error");
+                    user = new User("error", "error");
                     Toast.makeText(LoginActivity.this, "Error create user", Toast.LENGTH_SHORT).show();
                 }
 
-                boolean success = dbHelper.validateUser(userModel);
+                boolean success = dbHelper.validateUser(user);
 
                 if (success && !etUsername.getText().toString().equals("") && !etPassword.getText().toString().equals("")) {
                     Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();

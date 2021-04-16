@@ -2,17 +2,17 @@ package com.example.bucketes.models;
 
 import java.util.List;
 
-public class UserModel {
+public class User {
     private String username;
     private String password;
-    private List<ItemModel> items;
+    private List<Item> items;
 
-    public UserModel(String username, String password) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-    public UserModel(String username, String password, List<ItemModel> items) {
+    public User(String username, String password, List<Item> items) {
         this.username = username;
         this.password = password;
         this.items = items;
@@ -34,11 +34,11 @@ public class UserModel {
         this.password = password;
     }
 
-    public List<ItemModel> getItems() {
+    public List<Item> getItems() {
         return items;
     }
 
-    public void setItems(List<ItemModel> items) {
+    public void setItems(List<Item> items) {
         this.items = items;
     }
 

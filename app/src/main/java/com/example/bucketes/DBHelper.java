@@ -7,8 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.bucketes.models.ItemModel;
-import com.example.bucketes.models.UserModel;
+import com.example.bucketes.models.Item;
+import com.example.bucketes.models.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,12 +75,12 @@ public class DBHelper extends SQLiteOpenHelper {
      * This function validates if the UserModel entered by the user matches with the
      * data in the database.
      * */
-    public boolean validateUser(UserModel userModel) {
+    public boolean validateUser(User user) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         // select * from users_table where username=""
         String queryString = "select * from " + USERS_TABLE + " where " + COL_USERNAME + "= ?";
-        Cursor cursor = db.rawQuery(queryString, new String[]{userModel.getUsername()});       // cursor is the result set from a SQL statement
+        Cursor cursor = db.rawQuery(queryString, new String[]{user.getUsername()});       // cursor is the result set from a SQL statement
 
 
         Log.d("COUNT", "validateUser: " + cursor.getCount());
@@ -88,7 +88,7 @@ public class DBHelper extends SQLiteOpenHelper {
             String password = cursor.getString(1);
             Log.d("DBHelper", "cursor password: " + cursor.getString(1));
 
-            if (userModel.getPassword().equals(password)) {     // check if password matches from db
+            if (user.getPassword().equals(password)) {     // check if password matches from db
                 cursor.close();
                 db.close();
                 return true;
@@ -110,12 +110,12 @@ public class DBHelper extends SQLiteOpenHelper {
     /**
      * This function inserts the UserModel into the database.
      * */
-    public boolean addUser(UserModel userModel) {
+    public boolean addUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues cv = new ContentValues(); // ContentValues works similar to a hashmap with keys and values
-        cv.put(COL_USERNAME, userModel.getUsername());
-        cv.put(COL_PASSWORD, userModel.getPassword());
+        cv.put(COL_USERNAME, user.getUsername());
+        cv.put(COL_PASSWORD, user.getPassword());
 
         long insert = db.insert(USERS_TABLE, null, cv);
 
@@ -127,7 +127,7 @@ public class DBHelper extends SQLiteOpenHelper {
     /**
     * This function inserts the ItemModel into the database.
     * */
-    public boolean addItem(ItemModel item) {
+    public boolean addItem(Item item) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues cv = new ContentValues();
@@ -152,9 +152,9 @@ public class DBHelper extends SQLiteOpenHelper {
      * This function checks the database for the given user
      * and return the user's list of items.
      */
-    public List<ItemModel> getItems(UserModel user) {
+    public List<Item> getItems(User user) {
         SQLiteDatabase db = this.getReadableDatabase();
-        List<ItemModel> items = new ArrayList<>();
+        List<Item> items = new ArrayList<>();
 
         String query = "select * from " + USERS_TABLE + " natural join "  + ITEMS_TABLE + " where " + COL_USERNAME + "=" + user.getUsername();
         Cursor cursor = db.rawQuery(query, null);
@@ -169,7 +169,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 String completionDate = cursor.getColumnName(4);
                 String status = cursor.getColumnName(5);
 
-                ItemModel item = new ItemModel(username, title, story, completionDate, status);
+                Item item = new Item(username, title, story, completionDate, status);
                 items.add(item);
             } while (cursor.moveToNext());
         }

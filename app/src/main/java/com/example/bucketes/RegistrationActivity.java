@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.bucketes.models.UserModel;
+import com.example.bucketes.models.User;
 
 public class RegistrationActivity extends AppCompatActivity {
     private static String TAG = "RegistrationActivity";
@@ -46,18 +46,18 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DBHelper dbHelper = new DBHelper(RegistrationActivity.this);
-                UserModel userModel;
+                User user;
 
                 // attempt to instantiate user
                 try {
-                    userModel = new UserModel(etUsername.getText().toString(), etPassword.getText().toString());
+                    user = new User(etUsername.getText().toString(), etPassword.getText().toString());
                 } catch (Exception e) {
-                    userModel = new UserModel("error", "error");
+                    user = new User("error", "error");
 
                     Toast.makeText(RegistrationActivity.this, "Error creating user", Toast.LENGTH_SHORT).show();
                 }
 
-                boolean success = dbHelper.addUser(userModel);
+                boolean success = dbHelper.addUser(user);
 
                 // toasts to validate user creation
                 if (success && etPassword.getText().toString().equals(etConfirmPassword.getText().toString()) && !etUsername.getText().toString().equals("")) {

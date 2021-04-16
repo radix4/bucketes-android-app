@@ -4,62 +4,30 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.bucketes.models.ItemModel;
-import com.example.bucketes.models.UserModel;
+import com.example.bucketes.models.Item;
+import com.example.bucketes.models.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Dialog.CustomDialogListener {
 
     RecyclerView mainRecyclerView;
 
-    private UserModel user = LoginActivity.user;
-    private ArrayList<ItemModel> items;
-
+    private User user = LoginActivity.user;
+    private ArrayList<Item> items;
 
     private EditText etUsername, etPassword;
-    private Dialog addItemDialog, logoutConfirmDialog;
     private FloatingActionButton btnAddItem;
-    private MenuItem btnLogout;
-    private Button btnStay, btnYes; /* popup buttons */
 
-    /**
-     * Upon click logs out the user and return to login screen.
-     *
-     * @param item
-     * @return
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.btnMenuLogout:
-                Toast.makeText(MainActivity.this, "Logout", Toast.LENGTH_SHORT).show();
-                // interesting about the popups
-                // logoutConfirmDialog.setContentView(R.layout.add_item_popup);
-                // logoutConfirmDialog.show();
-
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,53 +39,15 @@ public class MainActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etLoginPassword);
         btnAddItem = findViewById(R.id.btnAddItem);
 
-        addItemDialog = new Dialog(this);
-        logoutConfirmDialog = new Dialog(this);
-        btnStay = findViewById(R.id.btnConfirmPopupStay);
-        btnYes = findViewById(R.id.btnConfirmPopupYes);
-
-
         items = new ArrayList<>();
 
         /* test dynamic items */
-        ItemModel item = new ItemModel("test", "superlongsuperlongsuperlongsuperlongsuperlongsuperlongsuperlongsuperlong", "test", "test", "test");
-        ItemModel item1 = new ItemModel("test1", "test1", "test1", "test1", "test1");
-        ItemModel item2 = new ItemModel("test2", "test2", "test2", "test2", "test2");
+        Item item = new Item("test", "superlongsuperlongsuperlongsuperlongsuperlongsuperlongsuperlongsuperlong", "test", "test", "test");
+        Item item1 = new Item("test1", "test1", "test1", "test1", "test1");
+        Item item2 = new Item("test2", "test2", "test2", "test2", "test2");
 
         items.add(item);
         items.add(item1);
-
-
-        /* add item popup */
-        btnAddItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addItemDialog.setContentView(R.layout.add_item_popup);
-                addItemDialog.show();
-            }
-        });
-
-
-
-        /* ===== UNDER EXPERIMENT ===== */
-        /* logout popup */
-        // btnStay.setOnClickListener(new View.OnClickListener() {
-        //     @Override
-        //     public void onClick(View v) {
-        //         addItemDialog.setContentView(R.layout.add_item_popup);
-        //         logoutConfirmDialog.hide();
-        //     }
-        // });
-
-
-        // /* change to login activity */
-        // btnYes.setOnClickListener(new View.OnClickListener() {
-        //     @Override
-        //     public void onClick(View v) {
-        //         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        //         startActivity(intent);
-        //     }
-        // });
 
 
         // find recycler view from activity_main.xml
@@ -130,19 +60,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    // TODO: create a logout method
-
-
-
-    /**
-     * This method displays the menu to the main_activity
-     * */
+    /** This method displays the menu to the main_activity. */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
-
         return true;
+    }
+
+    /** This function handles menu item selection. */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.btnMenuLogout:
+                Toast.makeText(MainActivity.this, "Logout clicked", Toast.LENGTH_SHORT).show();
+                openDialog();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /** This function opens up the menu logout dialog. */
+    public void openDialog() {
+        com.example.bucketes.Dialog logout = new com.example.bucketes.Dialog();
+        logout.show(getSupportFragmentManager(), "Logout Dialog");
+    }
+
+    /** This function switches to login activity. */
+    @Override
+    public void logout() {
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
     }
 }
 

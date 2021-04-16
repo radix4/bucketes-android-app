@@ -10,17 +10,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.bucketes.models.ItemModel;
+import com.example.bucketes.models.Item;
 
 import java.util.List;
 
 public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerViewAdapter.MyViewHolder> {
 
     Context context;
-    private List<ItemModel> items;
+    private List<Item> items;
 
     /** Constructor */
-    public MainRecyclerViewAdapter(Context context, List<ItemModel> items) {
+    public MainRecyclerViewAdapter(Context context, List<Item> items) {
         this.context = context;
         this.items = items;
     }

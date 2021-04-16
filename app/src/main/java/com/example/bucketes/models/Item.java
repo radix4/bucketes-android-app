@@ -1,6 +1,6 @@
 package com.example.bucketes.models;
 
-public class ItemModel {
+public class Item {
     private String username; /* reference to the user that this item belongs to */
     private String title;
     private String story;
@@ -8,7 +8,7 @@ public class ItemModel {
     private String status;  /* planned, in-progress, finished */
 
     /** Constructor */
-    public ItemModel(String username, String title, String story, String completionDate, String status) {
+    public Item(String username, String title, String story, String completionDate, String status) {
         this.username = username;
         this.title = title;
         this.story = story;
