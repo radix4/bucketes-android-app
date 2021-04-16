@@ -26,6 +26,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.861"
         app:layout_constraintStart_toStartOf="parent"
+        app:backgroundTint="@color/purple_200"
         app:rippleColor="#FFF" />
 
     <TextView

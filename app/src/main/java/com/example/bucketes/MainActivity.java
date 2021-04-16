@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         items = new ArrayList<>();
 
         /* test dynamic items */
-        ItemModel item = new ItemModel("test", "test", "test", "test", "test");
+        ItemModel item = new ItemModel("test", "superlongsuperlongsuperlongsuperlongsuperlongsuperlongsuperlongsuperlong", "test", "test", "test");
         ItemModel item1 = new ItemModel("test1", "test1", "test1", "test1", "test1");
         ItemModel item2 = new ItemModel("test2", "test2", "test2", "test2", "test2");
 
