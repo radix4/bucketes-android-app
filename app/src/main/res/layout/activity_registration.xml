@@ -116,10 +116,10 @@
         app:layout_constraintHorizontal_bias="0.03"
         app:layout_constraintStart_toStartOf="@+id/etRegisterUsername" />
 
-    <EditText
+    <TextView
         android:id="@+id/textWarnPassword1R"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="133dp"
+        android:layout_height="25dp"
         android:text="Passwords didn’t match"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="12sp"
@@ -129,17 +129,17 @@
         app:layout_constraintHorizontal_bias="0.03"
         app:layout_constraintStart_toStartOf="@+id/etRegisterPassword" />
 
-    <EditText
+    <TextView
         android:id="@+id/textWarnPassword2R"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="129dp"
+        android:layout_height="25dp"
         android:text="Confirm Password"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="12sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/etRegisterConfirmPassword"
         app:layout_constraintEnd_toEndOf="@+id/etRegisterConfirmPassword"
-        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintHorizontal_bias="0.031"
         app:layout_constraintStart_toStartOf="@+id/etRegisterConfirmPassword" />
 
     <TextView

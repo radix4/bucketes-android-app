@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 boolean success = dbHelper.validateUser(userModel);
 
-                if (success) {
+                if (success && !etUsername.getText().toString().equals("") && !etPassword.getText().toString().equals("")) {
                     Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
@@ -71,16 +71,23 @@ public class LoginActivity extends AppCompatActivity {
                         WarnName.setText("Enter Name");
                     }
                     // No password entered
-                    else if (etPassword.getText().toString().equals("")) {
+                    if (etPassword.getText().toString().equals("")) {
                         WarnPassword.setVisibility(View.VISIBLE);
                         WarnPassword.setText("Enter Password");
                     }
-                    else {
-                    // Wrong name or password
+                    if (!etPassword.getText().toString().equals("") && !etUsername.getText().toString().equals("")){
+                        // Wrong name or password
                         WarnPassword.setVisibility(View.VISIBLE);
                         WarnName.setVisibility(View.VISIBLE);
                         WarnName.setText("Wrong Name or Password");
                         WarnPassword.setText("Wrong Name or Password");
+                    }
+                    // Hide warning if it was taken care of
+                    if (!etUsername.getText().toString().equals("")) {
+                        WarnName.setVisibility(View.INVISIBLE);
+                    }
+                    if (!etPassword.getText().toString().equals("")) {
+                        WarnPassword.setVisibility(View.INVISIBLE);
                     }
                     Toast.makeText(LoginActivity.this, "Failed to login", Toast.LENGTH_SHORT).show();
                 }

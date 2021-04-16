@@ -54,51 +54,58 @@ public class RegistrationActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     userModel = new UserModel("error", "error");
 
+                    Toast.makeText(RegistrationActivity.this, "Error creating user", Toast.LENGTH_SHORT).show();
+                }
+
+                boolean success = dbHelper.addUser(userModel);
+
+                // toasts to validate user creation
+                if (success && etPassword.getText().toString().equals(etConfirmPassword.getText().toString()) && !etUsername.getText().toString().equals("")) {
+                    Toast.makeText(RegistrationActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                } else {
                     // No name entered
                     if (etUsername.getText().toString().equals("")) {
-                        txtWarnName.setText("Enter Name");
-                        txtWarnName.setVisibility(View.VISIBLE);
-                    }
-                    Toast.makeText(RegistrationActivity.this, "Error create user", Toast.LENGTH_SHORT).show();
-                }
-
-                // check password == confirm password
-                if (etPassword.getText().toString().equals(etConfirmPassword.getText().toString())) {
-                    boolean success = dbHelper.addUser(userModel);
-
-                    // toasts to validate user creation
-                    if (success) {
-                        Toast.makeText(RegistrationActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
-                        startActivity(intent);
-                    }
-                    else
-                        Toast.makeText(RegistrationActivity.this, "Error creating user", Toast.LENGTH_SHORT).show();
-                } else {
-                    if (etPassword.getText().toString().equals("") || etConfirmPassword.getText().toString().equals("")) {
-
-                        // No password entered
-                        if (etPassword.getText().toString().equals("")) {
-                            txtWarnPassword1.setText("Enter Password");
-                            txtWarnPassword1.setVisibility(View.VISIBLE);
-                        }
-
-                        // Password is not confirmed
-                        if (etPassword.getText().toString().equals("")) {
-                            txtWarnPassword2.setText("Confirm Password");
-                            txtWarnPassword2.setVisibility(View.VISIBLE);
-                        }
+                        WarnName.setText("Enter Name");
+                        WarnName.setVisibility(View.VISIBLE);
                     }
 
-                    else {
-                        WarnPassword1.setText("Passwords don't match");
-                        WarnPassword2.setText("Passwords don't match");
+                    // Check passwords
+                    if (etPassword.getText().toString().equals("")) {
+                        WarnPassword1.setText("Enter Password");
+                        WarnPassword1.setVisibility(View.VISIBLE);
+                    }
+
+                    // Password is not confirmed
+                    if (etConfirmPassword.getText().toString().equals("")) {
+                        WarnPassword2.setVisibility(View.VISIBLE);
+                        WarnPassword2.setText("Confirm Password");
+                    }
+
+                    if (!etPassword.getText().toString().equals("") && !etConfirmPassword.getText().toString().equals("")){
+                        // Password != Password confirm
                         WarnPassword1.setVisibility(View.VISIBLE);
                         WarnPassword2.setVisibility(View.VISIBLE);
+                        WarnPassword1.setText("Passwords don't match");
+                        WarnPassword2.setText("Passwords don't match");
                     }
-                    Toast.makeText(RegistrationActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();;
+
+                    // Hide warning if it was taken care of
+                    if (!etUsername.getText().toString().equals("")) {
+                        WarnName.setVisibility(View.INVISIBLE);
+                    }
+
+                    if (!etPassword.getText().toString().equals("")) {
+                        WarnPassword1.setVisibility(View.INVISIBLE);
+                    }
+
+                    if (!etConfirmPassword.getText().toString().equals("")) {
+                        WarnPassword2.setVisibility(View.INVISIBLE);
+                    }
+                    Toast.makeText(RegistrationActivity.this, "Error creating user", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
         });
 
         // upon click switches to Activity Login
