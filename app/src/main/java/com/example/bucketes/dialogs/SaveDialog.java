@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-public class LogoutDialog extends AppCompatDialogFragment {
+public class SaveDialog extends AppCompatDialogFragment {
     private CustomDialogListener listener;
 
     @NonNull
@@ -18,18 +18,18 @@ public class LogoutDialog extends AppCompatDialogFragment {
     public android.app.Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Bucketes App")
-                .setMessage("Do you want to logout?")
-                .setPositiveButton("Stay", new DialogInterface.OnClickListener() {
+                .setMessage("Do you want to save changes before closing?")
+                .setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // automatically closes dialog
                     }
-                }).setNegativeButton("Logout", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        listener.logout();
-                    }
-                });
+                }).setNegativeButton("Disregard", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                listener.goBack();
+            }
+        });
 
         return builder.create();
     }
@@ -46,6 +46,6 @@ public class LogoutDialog extends AppCompatDialogFragment {
     }
 
     public interface CustomDialogListener {
-        void logout();
+        void goBack();
     }
 }

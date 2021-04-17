@@ -10,7 +10,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-public class DetailActivity extends AppCompatActivity {
+import com.example.bucketes.dialogs.AddItemDialog;
+import com.example.bucketes.dialogs.LogoutDialog;
+import com.example.bucketes.dialogs.SaveDialog;
+
+public class DetailActivity extends AppCompatActivity implements SaveDialog.CustomDialogListener {
 
     RadioGroup radioGroup;
     RadioButton radioButton;
@@ -28,7 +32,7 @@ public class DetailActivity extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DetailActivity.this, DetailActivity.class);
+                openSaveDialog();
             }
         });
         save.setOnClickListener(new View.OnClickListener() {
@@ -37,5 +41,17 @@ public class DetailActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    /** This function opens up the add item dialog. */
+    public void openSaveDialog() {
+        SaveDialog dialog = new SaveDialog();
+        dialog.show(getSupportFragmentManager(), "Save Changes Dialog");
+    }
+
+    /** This function switches to Main activity. */
+    public void goBack() {
+        Intent intent = new Intent(DetailActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 }

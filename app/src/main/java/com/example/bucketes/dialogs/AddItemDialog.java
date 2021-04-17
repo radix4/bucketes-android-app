@@ -30,7 +30,7 @@ public class AddItemDialog extends AppCompatDialogFragment {
         View view = inflater.inflate(R.layout.add_item_dialog, null);
 
         builder.setView(view)
-                .setTitle("Add a new item")
+                .setTitle("Bucketes App")
             .setMessage("Enter title of the item")
             .setPositiveButton("Add", new DialogInterface.OnClickListener() {
                 @Override
