@@ -7,6 +7,11 @@ public class Item {
     private String completionDate;
     private String status;  /* planned, in-progress, finished */
 
+    public Item(String username, String title) {
+        this.username = username;
+        this.title = title;
+    }
+
     /** Constructor */
     public Item(String username, String title, String story, String completionDate, String status) {
         this.username = username;

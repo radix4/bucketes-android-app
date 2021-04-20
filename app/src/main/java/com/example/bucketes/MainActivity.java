@@ -54,10 +54,11 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
         /* test dynamic items */
         Item item = new Item("test", "superlongsuperlongsuperlongsuperlongsuperlongsuperlongsuperlongsuperlong", "test", "test", "test");
         Item item1 = new Item("test1", "test1", "test1", "test1", "test1");
-        Item item2 = new Item("test2", "test2", "test2", "test2", "test2");
+        Item item2 = new Item("test2", "test2");
 
         items.add(item);
         items.add(item1);
+        items.add(item2);
 
 
         // find recycler view from activity_main.xml
@@ -111,8 +112,11 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
     }
 
     @Override
-    public void addItem(Item item) {
+    public void addItem(String title) {
+        Item item = new Item(user.getUsername(), title);
+        items.add(item);
 
+        System.out.println("I am the title: " + title);
     }
 
     public void handleBtnAddItem() {

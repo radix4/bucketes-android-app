@@ -18,7 +18,6 @@ import com.example.bucketes.models.Item;
 
 public class AddItemDialog extends AppCompatDialogFragment {
     private CustomDialogListener listener;
-    private Item item;
     private TextView txtTitle;
 
     @NonNull
@@ -36,6 +35,8 @@ public class AddItemDialog extends AppCompatDialogFragment {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     // TODO: implement logic of this method
+                    String itemTitle = txtTitle.getText().toString();
+                    listener.addItem(itemTitle);
                 }
             }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                 @Override
@@ -43,6 +44,9 @@ public class AddItemDialog extends AppCompatDialogFragment {
                     // automatically closes dialog
                 }
         });
+
+        txtTitle = view.findViewById(R.id.editTitle);
+
 
         return builder.create();
     }
@@ -59,6 +63,6 @@ public class AddItemDialog extends AppCompatDialogFragment {
     }
 
     public interface CustomDialogListener {
-        void addItem(Item item);
+        void addItem(String title);
     }
 }
