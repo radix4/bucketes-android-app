@@ -18,7 +18,7 @@ import com.example.bucketes.models.Item;
 
 public class AddItemDialog extends AppCompatDialogFragment {
     private CustomDialogListener listener;
-    private TextView txtTitle;
+    private TextView txtTitle, tvErrorMsg;
 
     @NonNull
     @Override
@@ -28,13 +28,15 @@ public class AddItemDialog extends AppCompatDialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.add_item_dialog, null);
 
+
+        txtTitle = view.findViewById(R.id.editTitle);
+
         builder.setView(view)
                 .setTitle("Bucketes App")
             .setMessage("Enter title of the item")
             .setPositiveButton("Add", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    // TODO: implement logic of this method
                     String itemTitle = txtTitle.getText().toString();
                     listener.addItem(itemTitle);
                 }
@@ -44,9 +46,6 @@ public class AddItemDialog extends AppCompatDialogFragment {
                     // automatically closes dialog
                 }
         });
-
-        txtTitle = view.findViewById(R.id.editTitle);
-
 
         return builder.create();
     }

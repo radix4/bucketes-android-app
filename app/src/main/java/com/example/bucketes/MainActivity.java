@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.bucketes.dialogs.AddItemDialog;
+import com.example.bucketes.dialogs.ErrorDialog;
 import com.example.bucketes.dialogs.LogoutDialog;
 import com.example.bucketes.models.Item;
 import com.example.bucketes.models.User;
@@ -104,6 +105,11 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
 
     @Override
     public void addItem(String title) {
+        if (title.isEmpty()) {
+            openErrorDialog();
+            return;
+        }
+
         /* instantiate new item */
         Item item = new Item(user.getUsername(), title);
 
@@ -116,6 +122,13 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
 
     public void handleBtnAddItem() {
         openAddItemDialog();
+    }
+
+
+    /** This function opens up the add item dialog. */
+    public void openErrorDialog() {
+        ErrorDialog dialog = new ErrorDialog();
+        dialog.show(getSupportFragmentManager(), "Add Item Dialog");
     }
 
 }
