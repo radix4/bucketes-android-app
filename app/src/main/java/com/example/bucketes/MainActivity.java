@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.bucketes.dialogs.AddItemDialog;
@@ -30,7 +29,6 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
     private List<Item> items = new ArrayList<>();
     private DBHelper dbHelper = new DBHelper(MainActivity.this);   // create reference to db
 
-    private EditText etUsername, etPassword;
     private FloatingActionButton btnAddItem;
 
 
@@ -43,8 +41,6 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
         items = dbHelper.getItems(user);
 
         /* initialize views by id */
-        etUsername = findViewById(R.id.etLoginUsername);
-        etPassword = findViewById(R.id.etLoginPassword);
         btnAddItem = findViewById(R.id.btnAddItem);
 
         btnAddItem.setOnClickListener(new View.OnClickListener() {
@@ -108,18 +104,14 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
 
     @Override
     public void addItem(String title) {
-        DBHelper dbHelper = new DBHelper(MainActivity.this);   // create reference to db
         /* instantiate new item */
         Item item = new Item(user.getUsername(), title);
 
         /* add item to db */
         dbHelper.addItem(item);
+
+        /* display items to the screen */
         items.add(item);
-
-        /* retrieve items from database */
-        items = dbHelper.getItems(user);
-
-        System.out.println("I am the title: " + title);
     }
 
     public void handleBtnAddItem() {
