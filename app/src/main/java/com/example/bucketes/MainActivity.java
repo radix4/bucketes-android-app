@@ -15,12 +15,15 @@ import android.widget.Toast;
 import com.example.bucketes.dialogs.AddItemDialog;
 import com.example.bucketes.dialogs.ErrorDialog;
 import com.example.bucketes.dialogs.LogoutDialog;
+import com.example.bucketes.dialogs.SameTitleErrorDialog;
 import com.example.bucketes.models.Item;
 import com.example.bucketes.models.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity implements LogoutDialog.CustomDialogListener, AddItemDialog.CustomDialogListener {
 
@@ -28,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
 
     private User user;
     private List<Item> items = new ArrayList<>();
+    private Set<String> itemsName = new HashSet<>();    /* this data structure checks for duplicates (aka two items in the same list cannot have same titles) */
     private DBHelper dbHelper = new DBHelper(MainActivity.this);   // create reference to db
 
     private FloatingActionButton btnAddItem;
@@ -40,6 +44,11 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
 
         user = LoginActivity.user;
         items = dbHelper.getItems(user);
+
+        /* copy item names to set */
+        for (Item i : items) {
+            itemsName.add(i.getTitle());
+        }
 
         /* initialize views by id */
         btnAddItem = findViewById(R.id.btnAddItem);
@@ -110,6 +119,11 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
             return;
         }
 
+        if (itemsName.contains(title)) {
+            openSameTitleErrorDialog();
+            return;
+        }
+
         /* instantiate new item */
         Item item = new Item(user.getUsername(), title);
 
@@ -118,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
 
         /* display items to the screen */
         items.add(item);
+        itemsName.add(item.getTitle());
     }
 
     public void handleBtnAddItem() {
@@ -128,6 +143,13 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
     /** This function opens up the add item dialog. */
     public void openErrorDialog() {
         ErrorDialog dialog = new ErrorDialog();
+        dialog.show(getSupportFragmentManager(), "Add Item Dialog");
+    }
+
+
+    /** This function opens up the add item dialog. */
+    public void openSameTitleErrorDialog() {
+        SameTitleErrorDialog dialog = new SameTitleErrorDialog();
         dialog.show(getSupportFragmentManager(), "Add Item Dialog");
     }
 
