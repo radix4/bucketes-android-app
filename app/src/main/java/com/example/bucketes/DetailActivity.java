@@ -32,6 +32,7 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 openSaveDialog();
             }
         });
