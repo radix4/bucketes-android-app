@@ -26,6 +26,7 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
 
     private EditText item;
     private Button save;
+    private TextView  WarnTitle, WarnStory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +56,41 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
                 User user;
 
                 // attempt to instantiate title
-                //title = new Item(title.getText().toString(), story.getText().toString());
-                //if (title.matches("")) {
-                //    Toast.makeText(DetailActivity.this, "Error adding title", Toast.LENGTH_SHORT).show();
-                //}
+                try {
+                    title = new Item(item.getText().toString(), story.getText().toString());
+                } catch (Exception e) {
+                    title = new Item("error", "error");
+                    Toast.makeText(DetailActivity.this, "Error adding title", Toast.LENGTH_SHORT).show();
+                }
+
+                boolean success = dbHelper.addItem(title);
+
+                if (success && !item.getText().toString().equals("") && !story.getText().toString().equals("")) {
+                    Toast.makeText(DetailActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(DetailActivity.this, MainActivity.class);
+                    startActivity(intent);
+                } else {
+                    // No title added
+                    if (item.getText().toString().equals("")) {
+                        WarnTitle.setVisibility(View.VISIBLE);
+                        WarnTitle.setText("Enter Title");
+                    }
+                    // No story entered
+                    if (story.getText().toString().equals("")) {
+                        WarnStory.setVisibility(View.VISIBLE);
+                        WarnStory.setText("Enter Story");
+                    }
+
+                    // Hide warning if fixed
+                    if (!item.getText().toString().equals("")) {
+                        WarnTitle.setVisibility(View.INVISIBLE);
+                    }
+                    if (!story.getText().toString().equals("")) {
+                        WarnStory.setVisibility(View.INVISIBLE);
+                    }
+                    Toast.makeText(DetailActivity.this, "Failed to save", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }
