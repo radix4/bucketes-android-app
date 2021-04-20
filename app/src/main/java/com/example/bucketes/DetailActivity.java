@@ -95,6 +95,14 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
         });
     }
 
+    public void checkButton(View v){
+        int radioId = radioGroup.getCheckedRadioButtonId();
+
+        radioButton = findViewById(radioId);
+
+        Toast.makeText(this, "Selected: " + radioButton.getText(), Toast.LENGTH_SHORT).show();
+    }
+
     /** This function opens up the add item dialog. */
     public void openSaveDialog() {
         SaveDialog dialog = new SaveDialog();
