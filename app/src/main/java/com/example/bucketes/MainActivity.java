@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
 
     private User user;
     private List<Item> items = new ArrayList<>();
+    private DBHelper dbHelper = new DBHelper(MainActivity.this);   // create reference to db
 
     private EditText etUsername, etPassword;
     private FloatingActionButton btnAddItem;
@@ -37,11 +38,9 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         user = LoginActivity.user;
-
-        DBHelper dbHelper = new DBHelper(MainActivity.this);   // create reference to db
-
-        // items = dbHelper.getItems(user);
+        items = dbHelper.getItems(user);
 
         /* initialize views by id */
         etUsername = findViewById(R.id.etLoginUsername);
@@ -118,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
         items.add(item);
 
         /* retrieve items from database */
-        //items = dbHelper.getItems(user);
+        items = dbHelper.getItems(user);
 
         System.out.println("I am the title: " + title);
     }

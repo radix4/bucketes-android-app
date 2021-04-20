@@ -16,6 +16,7 @@ import java.util.List;
 public class DBHelper extends SQLiteOpenHelper {
     public static final String DB_NAME = "users.db";
     public static final String USERS_TABLE = "users_table";
+    public static final String ITEMS_TABLE = "items_table";
     public static final String COL_USERNAME = "username";
     public static final String COL_PASSWORD = "password";
     public static final String COL_ITEM_ID = "item_id";
@@ -23,7 +24,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COL_STORY = "story";
     public static final String COL_COMPLETION_DATE = "completion_date";
     public static final String COL_STATUS = "status";
-    public static final String ITEMS_TABLE = "items_table";
 
     /**
      * This function creates the database if the database has not been created.
@@ -156,20 +156,22 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         List<Item> items = new ArrayList<>();
 
-        String query = "select * from " + USERS_TABLE + " natural join "  + ITEMS_TABLE + " where " + COL_USERNAME + "=" + user.getUsername();
-        Cursor cursor = db.rawQuery(query, null);
 
+        String query = "select * from users_table natural join items_table where  " + COL_USERNAME + "= ?";
+
+        /* cursor is the result set from a SQL statement */
+        Cursor cursor = db.rawQuery(query, new String[]{user.getUsername()});
 
         if (cursor.moveToFirst()) {
             do {
-                /* table order: id, username, title, story, completion date, status */
-                String username = cursor.getColumnName(1);
-                String title = cursor.getColumnName(2);
-                String story = cursor.getColumnName(3);
-                String completionDate = cursor.getColumnName(4);
-                String status = cursor.getColumnName(5);
+                /* caution: joined tables have different attributes, carefully check for each column  */
+                int usernameIndex = cursor.getColumnIndex("username");
+                int titleIndex = cursor.getColumnIndex("title");
 
-                Item item = new Item(username, title, story, completionDate, status);
+                String username = cursor.getString(usernameIndex);
+                String title = cursor.getString(titleIndex);
+
+                Item item = new Item(username, title);
                 items.add(item);
             } while (cursor.moveToNext());
         }
