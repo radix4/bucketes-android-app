@@ -20,13 +20,14 @@ import com.example.bucketes.models.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LogoutDialog.CustomDialogListener, AddItemDialog.CustomDialogListener {
 
     RecyclerView mainRecyclerView;
 
-    private User user = LoginActivity.user;
-    private ArrayList<Item> items;
+    private User user;
+    private List<Item> items = new ArrayList<>();
 
     private EditText etUsername, etPassword;
     private FloatingActionButton btnAddItem;
@@ -36,6 +37,11 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        user = LoginActivity.user;
+
+        DBHelper dbHelper = new DBHelper(MainActivity.this);   // create reference to db
+
+        // items = dbHelper.getItems(user);
 
         /* initialize views by id */
         etUsername = findViewById(R.id.etLoginUsername);
@@ -48,17 +54,6 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
                 handleBtnAddItem();
             }
         });
-
-        items = new ArrayList<>();
-
-        /* test dynamic items */
-        Item item = new Item("test", "superlongsuperlongsuperlongsuperlongsuperlongsuperlongsuperlongsuperlong", "test", "test", "test");
-        Item item1 = new Item("test1", "test1", "test1", "test1", "test1");
-        Item item2 = new Item("test2", "test2");
-
-        items.add(item);
-        items.add(item1);
-        items.add(item2);
 
 
         // find recycler view from activity_main.xml
@@ -108,13 +103,22 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
     /** This function opens up the add item dialog. */
     public void openAddItemDialog() {
         AddItemDialog dialog = new AddItemDialog();
+        System.out.println("testing: " + user.getUsername());
         dialog.show(getSupportFragmentManager(), "Add Item Dialog");
     }
 
     @Override
     public void addItem(String title) {
+        DBHelper dbHelper = new DBHelper(MainActivity.this);   // create reference to db
+        /* instantiate new item */
         Item item = new Item(user.getUsername(), title);
+
+        /* add item to db */
+        dbHelper.addItem(item);
         items.add(item);
+
+        /* retrieve items from database */
+        //items = dbHelper.getItems(user);
 
         System.out.println("I am the title: " + title);
     }

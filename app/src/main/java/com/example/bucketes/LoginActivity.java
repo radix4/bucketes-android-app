@@ -40,15 +40,11 @@ public class LoginActivity extends AppCompatActivity {
         WarnName = findViewById(R.id.textWarnNameS);
         WarnPassword = findViewById(R.id.textWarnPasswordS);
 
-        /* instantiate user */
-        user = new User(etUsername.getText().toString(), etPassword.getText().toString());
-
         /* ===== login ===== */
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DBHelper dbHelper = new DBHelper(LoginActivity.this);   // create reference to db
-                User user;
 
                 /* attempt to instantiate user */
                 try {
