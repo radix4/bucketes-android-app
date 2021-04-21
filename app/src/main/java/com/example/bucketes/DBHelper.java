@@ -184,14 +184,22 @@ public class DBHelper extends SQLiteOpenHelper {
     /**
      * This function deletes item with specified is from the database.
      * */
-    public boolean deleteItem(Integer id) {
+    public boolean deleteItem(Item item) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        long delete = db.delete(ITEMS_TABLE, "item_id = ? ",
-                new String[] { Integer.toString(id) });
+        String query = "DELETE FROM " + ITEMS_TABLE + " WHERE " + COL_ITEM_ID + " = " + item.getId();
 
-        db.close();
+        Cursor cursor = db.rawQuery(query, null);
 
-        return delete != -1;
+        if (cursor.moveToFirst()) {
+            cursor.close();
+            db.close();
+            return true;
+        }
+        else {
+            cursor.close();
+            db.close();
+            return false;
+        }
     }
 }

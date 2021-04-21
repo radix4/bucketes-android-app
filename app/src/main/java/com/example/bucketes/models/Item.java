@@ -1,6 +1,7 @@
 package com.example.bucketes.models;
 
 public class Item {
+    public String id;
     private String username; /* reference to the user that this item belongs to */
     private String title;
     private String story;
@@ -56,6 +57,10 @@ public class Item {
 
     public String getStatus() {
         return status;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public void setStatus(String status) {

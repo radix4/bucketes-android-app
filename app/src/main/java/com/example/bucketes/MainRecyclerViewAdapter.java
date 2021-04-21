@@ -46,7 +46,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
             @Override
             public void onClick(View view) {
                 if (TrashClickListener != null) {
-                    TrashClickListener.onTrashClick(position);
+                    TrashClickListener.onTrashClick(position, items.get(position).getId());
                 }
             }
         });
@@ -89,7 +89,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
 
     public interface ItemClickListener {
         void onItemClick(int position);
-        void onTrashClick(int position);
+        void onTrashClick(int position, String id);
     }
 
     // Create trash can click listener

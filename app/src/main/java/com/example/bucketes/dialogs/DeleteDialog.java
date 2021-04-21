@@ -18,6 +18,16 @@ import com.example.bucketes.models.Item;
 public class DeleteDialog extends AppCompatDialogFragment {
     private CustomDialogListener listener;
     private TextView txtTitle;
+    private String id;
+
+    public DeleteDialog(String id) {
+        super();
+        this.id = id;
+    }
+
+    public String getIdForDeletion() {
+        return id;
+    }
 
     @NonNull
     @Override
@@ -34,7 +44,7 @@ public class DeleteDialog extends AppCompatDialogFragment {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        listener.deleteItem();
+                        listener.deleteItem(getIdForDeletion());
                     }
                 }).setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
@@ -58,6 +68,6 @@ public class DeleteDialog extends AppCompatDialogFragment {
     }
 
     public interface CustomDialogListener {
-        void deleteItem();
+        void deleteItem(String id);
     }
 }
