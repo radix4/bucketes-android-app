@@ -18,6 +18,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
 
     Context context;
     private List<Item> items;
+    private ItemClickListener mItemClickListener, TrashClickListener;
 
     /** Constructor */
     public MainRecyclerViewAdapter(Context context, List<Item> items) {
@@ -39,6 +40,26 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.title.setText(items.get(position).getTitle());
+
+        // Click listener for trash can
+        holder.imgTrashCan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (TrashClickListener != null) {
+                    TrashClickListener.onTrashClick(position);
+                }
+            }
+        });
+
+        // Click listener for the item
+        holder.title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mItemClickListener != null) {
+                    mItemClickListener.onItemClick(position);
+                }
+            }
+        });
     }
 
     /** This method displays the number of items in the recycler view. */
@@ -60,4 +81,20 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
             imgTrashCan = itemView.findViewById(R.id.imgTrashCan);
         }
     }
+
+    // Create item click listener
+    public void addItemClickListener(ItemClickListener listener) {
+        mItemClickListener = listener;
+    }
+
+    public interface ItemClickListener {
+        void onItemClick(int position);
+        void onTrashClick(int position);
+    }
+
+    // Create trash can click listener
+    public void addTrashClickListener(ItemClickListener listener) {
+        TrashClickListener = listener;
+    }
+
 }

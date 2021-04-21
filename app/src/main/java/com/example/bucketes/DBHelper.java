@@ -180,4 +180,18 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return items;
     }
+
+    /**
+     * This function deletes item with specified is from the database.
+     * */
+    public boolean deleteItem(Integer id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        long delete = db.delete(ITEMS_TABLE, "item_id = ? ",
+                new String[] { Integer.toString(id) });
+
+        db.close();
+
+        return delete != -1;
+    }
 }

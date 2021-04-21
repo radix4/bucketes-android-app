@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.bucketes.dialogs.AddItemDialog;
+import com.example.bucketes.dialogs.DeleteDialog;
 import com.example.bucketes.dialogs.ErrorDialog;
 import com.example.bucketes.dialogs.LogoutDialog;
 import com.example.bucketes.dialogs.SameTitleErrorDialog;
@@ -25,7 +26,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class MainActivity extends AppCompatActivity implements LogoutDialog.CustomDialogListener, AddItemDialog.CustomDialogListener {
+public class MainActivity extends AppCompatActivity implements LogoutDialog.CustomDialogListener, AddItemDialog.CustomDialogListener, DeleteDialog.CustomDialogListener, MainRecyclerViewAdapter.ItemClickListener {
 
     RecyclerView mainRecyclerView;
 
@@ -68,6 +69,8 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
         MainRecyclerViewAdapter mainAdapter = new MainRecyclerViewAdapter(this, items);
         mainRecyclerView.setAdapter(mainAdapter);
         mainRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mainAdapter.addItemClickListener(this);
+        mainAdapter.addTrashClickListener(this);
     }
 
 
@@ -150,6 +153,31 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
     /** This function opens up the add item dialog. */
     public void openSameTitleErrorDialog() {
         SameTitleErrorDialog dialog = new SameTitleErrorDialog();
+        dialog.show(getSupportFragmentManager(), "Add Item Dialog");
+    }
+
+    // Handle Item deletion
+    @Override
+    public void deleteItem() {
+//        /* delete item from the db */
+//        dbHelper.deleteItem(item.id);
+//
+//        /* display items to the screen */
+//        items.remove(item);
+//        itemsName.add(item.getTitle());
+    }
+
+    // Click on item, should display its detailed info
+    @Override
+    public void onItemClick(int position) {
+        Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+        startActivity(intent);
+    }
+
+    // Handle trash can click
+    @Override
+    public void onTrashClick(int position) {
+        DeleteDialog dialog = new DeleteDialog();
         dialog.show(getSupportFragmentManager(), "Add Item Dialog");
     }
 
