@@ -18,15 +18,15 @@ import com.example.bucketes.models.Item;
 public class DeleteDialog extends AppCompatDialogFragment {
     private CustomDialogListener listener;
     private TextView txtTitle;
-    private String id;
+    private String title;
 
-    public DeleteDialog(String id) {
+    public DeleteDialog(String title) {
         super();
-        this.id = id;
+        this.title = title;
     }
 
-    public String getIdForDeletion() {
-        return id;
+    public String getTitleForDeletion() {
+        return title;
     }
 
     @NonNull
@@ -40,11 +40,11 @@ public class DeleteDialog extends AppCompatDialogFragment {
         txtTitle = view.findViewById(R.id.txtItemTitle);
 
         builder.setTitle("Bucketes App")
-                .setMessage("Are you sure you want to delete this item?")
+                .setMessage("Are you sure you want to delete '" + getTitleForDeletion() + "' ?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        listener.deleteItem(getIdForDeletion());
+                        listener.deleteItem(getTitleForDeletion());
                     }
                 }).setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
@@ -68,6 +68,6 @@ public class DeleteDialog extends AppCompatDialogFragment {
     }
 
     public interface CustomDialogListener {
-        void deleteItem(String id);
+        void deleteItem(String title);
     }
 }

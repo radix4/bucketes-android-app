@@ -158,20 +158,22 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
 
     // Handle Item deletion
     @Override
-    public void deleteItem(String id) {
+    public void deleteItem(String title) {
         Item itemForDeletion = null;
         for (Item i : items) {
-            if (i.getId() == id)
+            if (i.getTitle() == title)
                 itemForDeletion = i;
         }
 
         /* delete item from the db */
-        dbHelper.deleteItem(itemForDeletion);
+        dbHelper.deleteItem(user.getUsername(), title);
 
         /* display items to the screen */
         items.remove(itemForDeletion);
         itemsName.add(itemForDeletion.getTitle());
-        Toast.makeText(MainActivity.this, "Item " + itemForDeletion.getTitle() + " was deleted.", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+        startActivity(intent);
+        Toast.makeText(MainActivity.this, "Item '" + itemForDeletion.getTitle() + "' was deleted.", Toast.LENGTH_SHORT).show();
     }
 
     // Click on item, should display its detailed info
@@ -183,8 +185,8 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
 
     // Handle trash can click
     @Override
-    public void onTrashClick(int position, String id) {
-        DeleteDialog dialog = new DeleteDialog(id);
+    public void onTrashClick(int position, String title) {
+        DeleteDialog dialog = new DeleteDialog(title);
         dialog.show(getSupportFragmentManager(), "Delete Item Dialog");
     }
 

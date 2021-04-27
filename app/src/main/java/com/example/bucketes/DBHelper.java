@@ -184,10 +184,11 @@ public class DBHelper extends SQLiteOpenHelper {
     /**
      * This function deletes item with specified is from the database.
      * */
-    public boolean deleteItem(Item item) {
+    public boolean deleteItem(String user, String title) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        String query = "DELETE FROM " + ITEMS_TABLE + " WHERE " + COL_ITEM_ID + " = " + item.getId();
+        String query = "DELETE FROM " + ITEMS_TABLE + " WHERE " + COL_USERNAME
+                + " = '" + user + "' AND " + COL_TITLE + " = '" + title +"'";
 
         Cursor cursor = db.rawQuery(query, null);
 
