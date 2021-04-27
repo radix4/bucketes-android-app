@@ -5,6 +5,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,8 +25,9 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
     RadioGroup radioGroup;
     RadioButton radioButton;
 
-    private EditText item;
-    private Button save;
+
+    private Button cancel, save;
+    private EditText title, story, confirmTitle, confirmStory;
     private TextView  WarnTitle, WarnStory;
 
     @Override
@@ -34,10 +36,12 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
         setContentView(R.layout.detailed_item);
 
         radioGroup = findViewById(R.id.radioGroup);
-        EditText title = findViewById(R.id.editTitle);
-        EditText story = findViewById(R.id.editTitle);
-        Button cancel = findViewById(R.id.button1);
-        Button save = findViewById(R.id.button2);
+        title = findViewById(R.id.ItemTitle);
+        story = findViewById(R.id.itemStory);
+        cancel = findViewById(R.id.button1);
+        save = findViewById(R.id.button2);
+        WarnTitle = findViewById(R.id.textWarnNameS2);
+        WarnStory = findViewById(R.id.textWarnNameS3);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -52,26 +56,24 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
             @Override
             public void onClick(View v) {
                 DBHelper dbHelper = new DBHelper(DetailActivity.this);
-                Item title;
-                User user;
+                Item item;
 
-                // attempt to instantiate title
+                // attempt to instantiate item
                 try {
-                    title = new Item(item.getText().toString(), story.getText().toString());
+                    item = new Item(title.getText().toString(), story.getText().toString());
                 } catch (Exception e) {
-                    title = new Item("error", "error");
+                    item = new Item("error", "error");
                     Toast.makeText(DetailActivity.this, "Error adding title", Toast.LENGTH_SHORT).show();
                 }
 
-                boolean success = dbHelper.addItem(title);
+                 boolean success = dbHelper.addItem(item);
 
-                if (success && !item.getText().toString().equals("") && !story.getText().toString().equals("")) {
-                    Toast.makeText(DetailActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                if (success && !title.getText().toString().equals("") && !story.getText().toString().equals("")) {
                     Intent intent = new Intent(DetailActivity.this, MainActivity.class);
                     startActivity(intent);
                 } else {
                     // No title added
-                    if (item.getText().toString().equals("")) {
+                    if (title.getText().toString().equals("")) {
                         WarnTitle.setVisibility(View.VISIBLE);
                         WarnTitle.setText("Enter Title");
                     }
@@ -82,7 +84,7 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
                     }
 
                     // Hide warning if fixed
-                    if (!item.getText().toString().equals("")) {
+                    if (!title.getText().toString().equals("")) {
                         WarnTitle.setVisibility(View.INVISIBLE);
                     }
                     if (!story.getText().toString().equals("")) {

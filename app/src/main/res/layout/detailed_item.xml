@@ -6,6 +6,54 @@
     android:layout_height="match_parent"
     tools:context=".DetailActivity">
 
+    <TextView
+        android:id="@+id/textWarnNameS2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Title"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="12sp"
+        android:visibility="invisible"
+        android:layout_marginTop="3dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/ItemTitle"
+        app:layout_constraintEnd_toEndOf="@+id/ItemTitle"
+        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintStart_toStartOf="@+id/ItemTitle" />
+
+    <TextView
+        android:id="@+id/textWarnNameS3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="175dp"
+        android:text="Enter Story"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="12sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/ItemTitle"
+        app:layout_constraintEnd_toEndOf="@+id/ItemTitle"
+        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintStart_toStartOf="@+id/ItemTitle" />
+
+    <TextView
+        android:id="@+id/textWarnNameS4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="64dp"
+        android:layout_marginTop="67dp"
+        android:text="Enter Story"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="12sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/ItemTitle"
+        app:layout_constraintEnd_toEndOf="@+id/ItemTitle"
+        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintStart_toStartOf="@+id/ItemTitle" />
+
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
@@ -44,7 +92,7 @@
     </RadioGroup>
 
     <EditText
-        android:id="@+id/editTextTextMultiLine"
+        android:id="@+id/itemStory"
         android:layout_width="374dp"
         android:layout_height="405dp"
         android:layout_alignParentBottom="true"
@@ -60,7 +108,7 @@
         android:paddingTop="10dp" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/ItemTitle"
         android:layout_width="374dp"
         android:layout_height="55dp"
         android:layout_alignParentTop="true"
