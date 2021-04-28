@@ -27,8 +27,11 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
 
 
     private Button cancel, save;
-    private EditText title, story, confirmTitle, confirmStory;
+    private EditText title, story;
     private TextView  WarnTitle, WarnStory;
+    //DBHelper DB;
+
+    public static Item item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +59,7 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
             @Override
             public void onClick(View v) {
                 DBHelper dbHelper = new DBHelper(DetailActivity.this);
-                Item item;
+                //Item item;
 
                 // attempt to instantiate item
                 try {
@@ -75,12 +78,12 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
                     // No title added
                     if (title.getText().toString().equals("")) {
                         WarnTitle.setVisibility(View.VISIBLE);
-                        WarnTitle.setText("Enter Title");
+                        WarnTitle.setText("Required");
                     }
                     // No story entered
                     if (story.getText().toString().equals("")) {
                         WarnStory.setVisibility(View.VISIBLE);
-                        WarnStory.setText("Enter Story");
+                        WarnStory.setText("Required");
                     }
 
                     // Hide warning if fixed
