@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="65dp"
         android:orientation="horizontal"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="-42dp">
@@ -45,11 +45,11 @@
 
     <EditText
         android:id="@+id/itemStory"
-        android:layout_width="374dp"
+        android:layout_width="366dp"
         android:layout_height="405dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="135dp"
+        android:layout_marginBottom="115dp"
         android:autofillHints="true"
         android:background="@drawable/border"
         android:ems="10"
@@ -60,7 +60,7 @@
         android:paddingTop="10dp" />
 
     <EditText
-        android:id="@+id/ItemTitle"
+        android:id="@+id/itemTitle"
         android:layout_width="374dp"
         android:layout_height="55dp"
         android:layout_alignParentTop="true"
@@ -86,10 +86,10 @@
         android:layout_marginTop="37dp"
         android:layout_alignParentRight="true"
         android:layout_marginRight="35dp"
-        app:layout_constraintBottom_toTopOf="@+id/ItemTitle"
-        app:layout_constraintEnd_toEndOf="@+id/ItemTitle"
+        app:layout_constraintBottom_toTopOf="@+id/itemTitle"
+        app:layout_constraintEnd_toEndOf="@+id/itemTitle"
         app:layout_constraintHorizontal_bias="0.03"
-        app:layout_constraintStart_toStartOf="@+id/ItemTitle" />
+        app:layout_constraintStart_toStartOf="@+id/itemTitle" />
 
     <Button
         android:id="@+id/button1"
@@ -112,13 +112,13 @@
         android:text="Save" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
-        android:layout_width="300dp"
-        android:layout_height="55dp"
+        android:id="@+id/itemDate"
+        android:layout_width="376dp"
+        android:layout_height="56dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="34dp"
-        android:layout_marginTop="85dp"
+        android:layout_marginTop="90dp"
         android:autofillHints="true"
         android:background="@drawable/border"
         android:ems="10"

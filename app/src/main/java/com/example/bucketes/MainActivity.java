@@ -71,6 +71,17 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
         mainRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mainAdapter.addItemClickListener(this);
         mainAdapter.addTrashClickListener(this);
+
+        /** Delete after detail activity is complete
+         * Manually Insert an item with all the fields
+         * */
+//        Item testItem = new Item(user.getUsername(), "Test3", "This is a test item that is" +
+//                " manually inserted to db!", "01/02/2021", null);
+//        items.add(testItem);
+//        items.add(testItem);
+//        itemsName.add(testItem.getTitle());
+//        // add item to db
+//        dbHelper.addItem(testItem);
     }
 
 
@@ -171,15 +182,19 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
         /* display items to the screen */
         items.remove(itemForDeletion);
         itemsName.add(itemForDeletion.getTitle());
+        Toast.makeText(MainActivity.this, "Item '" + itemForDeletion.getTitle() + "' was deleted.", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(MainActivity.this, MainActivity.class);
         startActivity(intent);
-        Toast.makeText(MainActivity.this, "Item '" + itemForDeletion.getTitle() + "' was deleted.", Toast.LENGTH_SHORT).show();
     }
 
     // Click on item, should display its detailed info
     @Override
-    public void onItemClick(int position) {
+    public void onItemClick(int position, Item item) {
+        // Start detail activity
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+
+        // Pass clicked item to detail activity
+        intent.putExtra("item", item);
         startActivity(intent);
     }
 
@@ -189,7 +204,6 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
         DeleteDialog dialog = new DeleteDialog(title);
         dialog.show(getSupportFragmentManager(), "Delete Item Dialog");
     }
-
 }
 
 

@@ -167,11 +167,17 @@ public class DBHelper extends SQLiteOpenHelper {
                 /* caution: joined tables have different attributes, carefully check for each column  */
                 int usernameIndex = cursor.getColumnIndex("username");
                 int titleIndex = cursor.getColumnIndex("title");
+                int storyIndex = cursor.getColumnIndex("story");
+                int dateIndex = cursor.getColumnIndex("completion_date");
+                int statusIndex = cursor.getColumnIndex("status");
 
                 String username = cursor.getString(usernameIndex);
                 String title = cursor.getString(titleIndex);
+                String story = cursor.getString(storyIndex);
+                String date = cursor.getString(dateIndex);
+                String status = cursor.getString(statusIndex);
 
-                Item item = new Item(username, title);
+                Item item = new Item(username, title, story, date, status);
                 items.add(item);
             } while (cursor.moveToNext());
         }

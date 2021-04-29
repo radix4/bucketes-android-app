@@ -1,11 +1,9 @@
 package com.example.bucketes;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,8 +12,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.bucketes.dialogs.AddItemDialog;
-import com.example.bucketes.dialogs.LogoutDialog;
 import com.example.bucketes.dialogs.SaveDialog;
 import com.example.bucketes.models.Item;
 import com.example.bucketes.models.User;
@@ -25,11 +21,10 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
     RadioGroup radioGroup;
     RadioButton radioButton;
 
-
+    private User user;
     private Button cancel, save;
-    private EditText title, story;
-    private TextView  WarnTitle, WarnStory;
-    //DBHelper DB;
+    private EditText title, story, date, status;
+    private TextView  WarnTitle;
 
     public static Item item;
 
@@ -39,13 +34,42 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
         setContentView(R.layout.detailed_item);
 
         radioGroup = findViewById(R.id.radioGroup);
-        title = findViewById(R.id.ItemTitle);
+        title = findViewById(R.id.itemTitle);
         story = findViewById(R.id.itemStory);
+        date = findViewById(R.id.itemDate);
         cancel = findViewById(R.id.button1);
         save = findViewById(R.id.button2);
         WarnTitle = findViewById(R.id.textWarnNameS2);
-        //WarnStory = findViewById(R.id.textWarnNameS3);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // Get item title from main activity
+        Item passedItem = (Item) getIntent().getSerializableExtra("item");
+
+        // Set item title
+        title.setText(passedItem.getTitle(), TextView.BufferType.EDITABLE);
+
+        // Get item story from db
+        story.setText(passedItem.getStory(), TextView.BufferType.EDITABLE);
+
+        // Get item completion date from db
+        date.setText(passedItem.getCompletionDate(), TextView.BufferType.EDITABLE);
+
+        // Get item status from db
+        String statusTxt = passedItem.getStatus();
+        if (statusTxt != null) {
+            switch (statusTxt) {
+                case "planned":
+                    radioButton = findViewById(R.id.planned);
+                    break;
+                case "in progress":
+                    radioButton = findViewById(R.id.in_progress);
+                    break;
+                case "completed":
+                    radioButton = findViewById(R.id.completed);
+                    break;
+            }
+            radioButton.setChecked(true);
+        }
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
