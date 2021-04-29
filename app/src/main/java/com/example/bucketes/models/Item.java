@@ -1,6 +1,8 @@
 package com.example.bucketes.models;
 
-public class Item {
+import java.io.Serializable;
+
+public class Item implements Serializable {
     public String id;
     private String username; /* reference to the user that this item belongs to */
     private String title;

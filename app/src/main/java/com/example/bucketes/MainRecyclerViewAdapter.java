@@ -56,7 +56,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
             @Override
             public void onClick(View view) {
                 if (mItemClickListener != null) {
-                    mItemClickListener.onItemClick(position);
+                    mItemClickListener.onItemClick(position, items.get(position));
                 }
             }
         });
@@ -88,7 +88,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     }
 
     public interface ItemClickListener {
-        void onItemClick(int position);
+        void onItemClick(int position, Item item);
         void onTrashClick(int position, String title);
     }
 

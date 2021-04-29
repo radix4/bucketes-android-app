@@ -167,11 +167,17 @@ public class DBHelper extends SQLiteOpenHelper {
                 /* caution: joined tables have different attributes, carefully check for each column  */
                 int usernameIndex = cursor.getColumnIndex("username");
                 int titleIndex = cursor.getColumnIndex("title");
+                int storyIndex = cursor.getColumnIndex("story");
+                int dateIndex = cursor.getColumnIndex("completion_date");
+                int statusIndex = cursor.getColumnIndex("status");
 
                 String username = cursor.getString(usernameIndex);
                 String title = cursor.getString(titleIndex);
+                String story = cursor.getString(storyIndex);
+                String date = cursor.getString(dateIndex);
+                String status = cursor.getString(statusIndex);
 
-                Item item = new Item(username, title);
+                Item item = new Item(username, title, story, date, status);
                 items.add(item);
             } while (cursor.moveToNext());
         }
@@ -202,5 +208,64 @@ public class DBHelper extends SQLiteOpenHelper {
             db.close();
             return false;
         }
+    }
+
+
+
+    /**
+     * This function gets cursor for item by it's title and username.
+     */
+    public Cursor getCursor(String username, String title) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT DISTINCT * FROM " + ITEMS_TABLE + " WHERE " + COL_USERNAME
+                + "= ?" + " AND " + COL_TITLE + " = ?";
+
+        /* cursor is the result set from a SQL statement */
+        Cursor cursor = db.rawQuery(query, new String[]{username, title});
+
+        return cursor;
+    }
+
+    /**
+     * This function gets item story.
+     */
+    public String getStory(Cursor cursor) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        int storyIndex = cursor.getColumnIndex("story");
+        String story = cursor.getString(storyIndex);
+
+        cursor.close();
+        db.close();
+        return story;
+    }
+
+    /**
+     * This function gets item completion date.
+     */
+    public String getDate(Cursor cursor) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        int dateIndex = cursor.getColumnIndex("completion_date");
+        String date = cursor.getString(dateIndex);
+
+        cursor.close();
+        db.close();
+        return date;
+    }
+
+    /**
+     * This function gets item status.
+     */
+    public String getStatus(Cursor cursor) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        int statusIndex = cursor.getColumnIndex("status");
+        String status = cursor.getString(statusIndex);
+
+        cursor.close();
+        db.close();
+        return status;
     }
 }

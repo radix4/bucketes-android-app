@@ -71,6 +71,15 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
         mainRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mainAdapter.addItemClickListener(this);
         mainAdapter.addTrashClickListener(this);
+
+        // Delete after detail activity is complete
+//        Item testItem = new Item(user.getUsername(), "Test2", "This is a test item that is" +
+//                " manually inserted to db!", "01/02/2021", "completed");
+//        items.add(testItem);
+//        items.add(testItem);
+//        itemsName.add(testItem.getTitle());
+//        /* add item to db */
+//        dbHelper.addItem(testItem);
     }
 
 
@@ -178,8 +187,12 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
 
     // Click on item, should display its detailed info
     @Override
-    public void onItemClick(int position) {
+    public void onItemClick(int position, Item item) {
+        // Start detail activity
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+
+        // Pass clicked item to detail activity
+        intent.putExtra("item", item);
         startActivity(intent);
     }
 

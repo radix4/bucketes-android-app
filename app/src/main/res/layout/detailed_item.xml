@@ -17,10 +17,10 @@
         android:textColor="@android:color/holo_red_dark"
         android:textSize="12sp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/ItemTitle"
-        app:layout_constraintEnd_toEndOf="@+id/ItemTitle"
+        app:layout_constraintBottom_toTopOf="@+id/itemTitle"
+        app:layout_constraintEnd_toEndOf="@+id/itemTitle"
         app:layout_constraintHorizontal_bias="0.03"
-        app:layout_constraintStart_toStartOf="@+id/ItemTitle" />
+        app:layout_constraintStart_toStartOf="@+id/itemTitle" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -92,7 +92,7 @@
         app:layout_constraintStart_toStartOf="@+id/itemStory" />
 
     <EditText
-        android:id="@+id/ItemTitle"
+        android:id="@+id/itemTitle"
         android:layout_width="374dp"
         android:layout_height="55dp"
         android:layout_alignParentTop="true"
@@ -118,10 +118,10 @@
         android:layout_marginTop="37dp"
         android:layout_alignParentRight="true"
         android:layout_marginRight="35dp"
-        app:layout_constraintBottom_toTopOf="@+id/ItemTitle"
-        app:layout_constraintEnd_toEndOf="@+id/ItemTitle"
+        app:layout_constraintBottom_toTopOf="@+id/itemTitle"
+        app:layout_constraintEnd_toEndOf="@+id/itemTitle"
         app:layout_constraintHorizontal_bias="0.03"
-        app:layout_constraintStart_toStartOf="@+id/ItemTitle" />
+        app:layout_constraintStart_toStartOf="@+id/itemTitle" />
 
     <Button
         android:id="@+id/button1"
@@ -144,9 +144,9 @@
         android:text="Save" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
-        android:layout_width="300dp"
-        android:layout_height="55dp"
+        android:id="@+id/itemDate"
+        android:layout_width="374dp"
+        android:layout_height="61dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="34dp"

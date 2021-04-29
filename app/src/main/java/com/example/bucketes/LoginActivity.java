@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DBHelper dbHelper = new DBHelper(LoginActivity.this);   // create reference to db
+                DBHelper dbHelper = new DBHelper(LoginActivity.this);  // create reference to db
 
                 /* attempt to instantiate user */
                 try {
