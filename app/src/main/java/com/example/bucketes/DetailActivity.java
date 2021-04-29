@@ -40,7 +40,6 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
         cancel = findViewById(R.id.button1);
         save = findViewById(R.id.button2);
         WarnTitle = findViewById(R.id.textWarnNameS2);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Get item title from main activity
         Item passedItem = (Item) getIntent().getSerializableExtra("item");
