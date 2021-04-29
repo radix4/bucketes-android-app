@@ -44,7 +44,7 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
         cancel = findViewById(R.id.button1);
         save = findViewById(R.id.button2);
         WarnTitle = findViewById(R.id.textWarnNameS2);
-        WarnStory = findViewById(R.id.textWarnNameS3);
+        //WarnStory = findViewById(R.id.textWarnNameS3);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +71,7 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
 
                  boolean success = dbHelper.addItem(item);
 
-                if (success && !title.getText().toString().equals("") && !story.getText().toString().equals("")) {
+                if (success && !title.getText().toString().equals("")){
                     Intent intent = new Intent(DetailActivity.this, MainActivity.class);
                     startActivity(intent);
                 } else {
@@ -80,19 +80,12 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
                         WarnTitle.setVisibility(View.VISIBLE);
                         WarnTitle.setText("Required");
                     }
-                    // No story entered
-                    if (story.getText().toString().equals("")) {
-                        WarnStory.setVisibility(View.VISIBLE);
-                        WarnStory.setText("Required");
-                    }
 
                     // Hide warning if fixed
                     if (!title.getText().toString().equals("")) {
                         WarnTitle.setVisibility(View.INVISIBLE);
                     }
-                    if (!story.getText().toString().equals("")) {
-                        WarnStory.setVisibility(View.INVISIBLE);
-                    }
+
                     Toast.makeText(DetailActivity.this, "Failed to save", Toast.LENGTH_SHORT).show();
                 }
 

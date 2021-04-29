@@ -6,22 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".DetailActivity">
 
-    <TextView
-        android:id="@+id/textWarnNameS4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="64dp"
-        android:layout_marginTop="67dp"
-        android:text="Enter Story"
-        android:textColor="@android:color/holo_red_dark"
-        android:textSize="12sp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/ItemTitle"
-        app:layout_constraintEnd_toEndOf="@+id/ItemTitle"
-        app:layout_constraintHorizontal_bias="0.03"
-        app:layout_constraintStart_toStartOf="@+id/ItemTitle" />
-
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
@@ -74,22 +58,6 @@
         android:inputType="textMultiLine"
         android:paddingLeft="15dp"
         android:paddingTop="10dp" />
-
-    <TextView
-        android:id="@+id/textWarnNameS3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="35dp"
-        android:layout_marginTop="170dp"
-        android:text="Required"
-        android:textColor="@android:color/holo_red_dark"
-        android:textSize="12sp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/itemStory"
-        app:layout_constraintEnd_toEndOf="@+id/itemStory"
-        app:layout_constraintHorizontal_bias="0.03"
-        app:layout_constraintStart_toStartOf="@+id/itemStory" />
 
     <EditText
         android:id="@+id/ItemTitle"
