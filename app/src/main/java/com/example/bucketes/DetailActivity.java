@@ -23,7 +23,7 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
 
     private User user;
     private Button cancel, save;
-    private EditText title, story, date, status;
+    private EditText title, story, date;
     private TextView  WarnTitle;
 
     public static Item item;
@@ -45,13 +45,13 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
         Item passedItem = (Item) getIntent().getSerializableExtra("item");
 
         // Set item title
-        title.setText(passedItem.getTitle(), TextView.BufferType.EDITABLE);
+        title.setText(passedItem.getTitle());
 
         // Get item story from db
-        story.setText(passedItem.getStory(), TextView.BufferType.EDITABLE);
+        story.setText(passedItem.getStory());
 
         // Get item completion date from db
-        date.setText(passedItem.getCompletionDate(), TextView.BufferType.EDITABLE);
+        date.setText(passedItem.getCompletionDate());
 
         // Get item status from db
         String statusTxt = passedItem.getStatus();
@@ -84,15 +84,15 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
                 DBHelper dbHelper = new DBHelper(DetailActivity.this);
                 //Item item;
 
-                // attempt to instantiate item
-                try {
-                    item = new Item(title.getText().toString(), story.getText().toString());
-                } catch (Exception e) {
-                    item = new Item("error", "error");
-                    Toast.makeText(DetailActivity.this, "Error adding title", Toast.LENGTH_SHORT).show();
-                }
+//                // attempt to instantiate item
+//                try {
+//                    item = new Item(title.getText().toString(), story.getText().toString());
+//                } catch (Exception e) {
+//                    item = new Item("error", "error");
+//                    Toast.makeText(DetailActivity.this, "Error adding title", Toast.LENGTH_SHORT).show();
+//                }
 
-                 boolean success = dbHelper.addItem(item);
+                boolean success = dbHelper.updateItem(passedItem, title.getText().toString(), date.getText().toString(), story.getText().toString());
 
                 if (success && !title.getText().toString().equals("")){
                     Intent intent = new Intent(DetailActivity.this, MainActivity.class);

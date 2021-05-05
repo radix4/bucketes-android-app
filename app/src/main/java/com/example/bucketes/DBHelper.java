@@ -209,4 +209,28 @@ public class DBHelper extends SQLiteOpenHelper {
             return false;
         }
     }
+
+    /**
+     * This function deletes item with specified is from the database.
+     * */
+    public boolean updateItem(Item item, String newTitle, String newDate, String newStory) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "UPDATE " + ITEMS_TABLE + " SET " + COL_TITLE + " = '" + newTitle + "', " + COL_COMPLETION_DATE
+                +  " = '" + newDate + "', " + COL_STORY + " = '" + newStory  + "' "
+                + " WHERE " + COL_USERNAME + " = '" +  item.getUsername() + "' AND " + COL_TITLE + " = '" + item.getTitle() +"'";
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            cursor.close();
+            db.close();
+            return true;
+        }
+        else {
+            cursor.close();
+            db.close();
+            return false;
+        }
+    }
 }
