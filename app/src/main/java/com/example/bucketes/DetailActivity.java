@@ -25,7 +25,7 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
     private Button cancel, save;
     private EditText title, story, date;
     private TextView  WarnTitle;
-
+    String statusTxt;
     public static Item item;
 
     @Override
@@ -118,9 +118,8 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
 
     public void checkButton(View v){
         int radioId = radioGroup.getCheckedRadioButtonId();
-
         radioButton = findViewById(radioId);
-
+        statusTxt = radioButton.getText().toString();
         Toast.makeText(this, "Selected: " + radioButton.getText(), Toast.LENGTH_SHORT).show();
     }
 
