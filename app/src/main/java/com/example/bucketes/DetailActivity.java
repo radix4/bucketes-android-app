@@ -92,7 +92,7 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
 //                    Toast.makeText(DetailActivity.this, "Error adding title", Toast.LENGTH_SHORT).show();
 //                }
 
-                boolean success = dbHelper.updateItem(passedItem, title.getText().toString(), date.getText().toString(), story.getText().toString());
+                boolean success = dbHelper.updateItem(passedItem, title.getText().toString(), date.getText().toString(), story.getText().toString(), statusTxt);
 
                 if (success && !title.getText().toString().equals("")){
                     Intent intent = new Intent(DetailActivity.this, MainActivity.class);
