@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.EditText;
 
 import com.example.bucketes.models.Item;
 import com.example.bucketes.models.User;
@@ -197,6 +198,30 @@ public class DBHelper extends SQLiteOpenHelper {
                 + " = '" + user + "' AND " + COL_TITLE + " = '" + title +"'";
 
         Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            cursor.close();
+            db.close();
+            return true;
+        }
+        else {
+            cursor.close();
+            db.close();
+            return false;
+        }
+    }
+
+    /**
+     * This function updates item info in the db.
+     * */
+    public boolean updateItem(Item item, String newTitle, String newDate, String newStory, String newStatus) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "UPDATE " + ITEMS_TABLE + " SET " + COL_TITLE + " = '" + newTitle + "', " + COL_COMPLETION_DATE
+                +  " = '" + newDate + "', " + COL_STORY + " = '" + newStory  + "', " + COL_STATUS + " ='" + newStatus + "' "
+                + "WHERE " + COL_USERNAME + " = '" +  item.getUsername() + "' AND " + COL_TITLE + " = '" + item.getTitle() +"'";
+
+            Cursor cursor = db.rawQuery(query, null);
 
         if (cursor.moveToFirst()) {
             cursor.close();

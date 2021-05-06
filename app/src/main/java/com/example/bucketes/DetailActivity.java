@@ -23,9 +23,9 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
 
     private User user;
     private Button cancel, save;
-    private EditText title, story, date, status;
+    private EditText title, story, date;
     private TextView  WarnTitle;
-
+    String statusTxt;
     public static Item item;
 
     @Override
@@ -45,13 +45,13 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
         Item passedItem = (Item) getIntent().getSerializableExtra("item");
 
         // Set item title
-        title.setText(passedItem.getTitle(), TextView.BufferType.EDITABLE);
+        title.setText(passedItem.getTitle());
 
         // Get item story from db
-        story.setText(passedItem.getStory(), TextView.BufferType.EDITABLE);
+        story.setText(passedItem.getStory());
 
         // Get item completion date from db
-        date.setText(passedItem.getCompletionDate(), TextView.BufferType.EDITABLE);
+        date.setText(passedItem.getCompletionDate());
 
         // Get item status from db
         String statusTxt = passedItem.getStatus();
@@ -59,22 +59,33 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
             switch (statusTxt) {
                 case "planned":
                     radioButton = findViewById(R.id.planned);
+                    radioButton.setChecked(true);
                     break;
                 case "in progress":
                     radioButton = findViewById(R.id.in_progress);
+                    radioButton.setChecked(true);
                     break;
                 case "completed":
                     radioButton = findViewById(R.id.completed);
+                    radioButton.setChecked(true);
                     break;
             }
-            radioButton.setChecked(true);
+            //radioButton.setChecked(true);
         }
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                DBHelper dbHelper = new DBHelper(DetailActivity.this);
 
                 openSaveDialog();
+
+                boolean success = dbHelper.updateItem(passedItem, title.getText().toString(), date.getText().toString(), story.getText().toString(), statusTxt);
+
+                if (success && !title.getText().toString().equals("")) {
+                    Intent intent = new Intent(DetailActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -84,15 +95,15 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
                 DBHelper dbHelper = new DBHelper(DetailActivity.this);
                 //Item item;
 
-                // attempt to instantiate item
-                try {
-                    item = new Item(title.getText().toString(), story.getText().toString());
-                } catch (Exception e) {
-                    item = new Item("error", "error");
-                    Toast.makeText(DetailActivity.this, "Error adding title", Toast.LENGTH_SHORT).show();
-                }
+//                // attempt to instantiate item
+//                try {
+//                    item = new Item(title.getText().toString(), story.getText().toString());
+//                } catch (Exception e) {
+//                    item = new Item("error", "error");
+//                    Toast.makeText(DetailActivity.this, "Error adding title", Toast.LENGTH_SHORT).show();
+//                }
 
-                 boolean success = dbHelper.addItem(item);
+                boolean success = dbHelper.updateItem(passedItem, title.getText().toString(), date.getText().toString(), story.getText().toString(), statusTxt);
 
                 if (success && !title.getText().toString().equals("")){
                     Intent intent = new Intent(DetailActivity.this, MainActivity.class);
@@ -108,9 +119,11 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
                     if (!title.getText().toString().equals("")) {
                         WarnTitle.setVisibility(View.INVISIBLE);
                     }
+                    Intent intent = new Intent(DetailActivity.this, MainActivity.class);
+                    startActivity(intent);
 
-                    Toast.makeText(DetailActivity.this, "Failed to save", Toast.LENGTH_SHORT).show();
                 }
+               // Toast.makeText(DetailActivity.this, "Failed to save", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -118,9 +131,8 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
 
     public void checkButton(View v){
         int radioId = radioGroup.getCheckedRadioButtonId();
-
         radioButton = findViewById(radioId);
-
+        statusTxt = radioButton.getText().toString();
         Toast.makeText(this, "Selected: " + radioButton.getText(), Toast.LENGTH_SHORT).show();
     }
 
@@ -132,6 +144,11 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
 
     /** This function switches to Main activity. */
     public void goBack() {
+        Intent intent = new Intent(DetailActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void goSave() {
         Intent intent = new Intent(DetailActivity.this, MainActivity.class);
         startActivity(intent);
     }
