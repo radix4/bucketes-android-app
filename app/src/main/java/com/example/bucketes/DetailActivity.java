@@ -59,22 +59,33 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
             switch (statusTxt) {
                 case "planned":
                     radioButton = findViewById(R.id.planned);
+                    radioButton.setChecked(true);
                     break;
                 case "in progress":
                     radioButton = findViewById(R.id.in_progress);
+                    radioButton.setChecked(true);
                     break;
                 case "completed":
                     radioButton = findViewById(R.id.completed);
+                    radioButton.setChecked(true);
                     break;
             }
-            radioButton.setChecked(true);
+            //radioButton.setChecked(true);
         }
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                DBHelper dbHelper = new DBHelper(DetailActivity.this);
 
                 openSaveDialog();
+
+                boolean success = dbHelper.updateItem(passedItem, title.getText().toString(), date.getText().toString(), story.getText().toString(), statusTxt);
+
+                if (success && !title.getText().toString().equals("")) {
+                    Intent intent = new Intent(DetailActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -108,9 +119,11 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
                     if (!title.getText().toString().equals("")) {
                         WarnTitle.setVisibility(View.INVISIBLE);
                     }
+                    Intent intent = new Intent(DetailActivity.this, MainActivity.class);
+                    startActivity(intent);
 
-                    Toast.makeText(DetailActivity.this, "Failed to save", Toast.LENGTH_SHORT).show();
                 }
+               // Toast.makeText(DetailActivity.this, "Failed to save", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -131,6 +144,11 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
 
     /** This function switches to Main activity. */
     public void goBack() {
+        Intent intent = new Intent(DetailActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void goSave() {
         Intent intent = new Intent(DetailActivity.this, MainActivity.class);
         startActivity(intent);
     }
