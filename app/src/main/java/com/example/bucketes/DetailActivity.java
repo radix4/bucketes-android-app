@@ -123,6 +123,8 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
                     startActivity(intent);
 
                 }
+
+               // }
                // Toast.makeText(DetailActivity.this, "Failed to save", Toast.LENGTH_SHORT).show();
 
             }
