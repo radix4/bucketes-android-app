@@ -47,10 +47,13 @@ public class RegistrationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 DBHelper dbHelper = new DBHelper(RegistrationActivity.this);
                 User user;
+                String username = etUsername.getText().toString();
+                String password = etPassword.getText().toString();
+                String confirmPassword = etConfirmPassword.getText().toString();
 
                 // attempt to instantiate user
                 try {
-                    user = new User(etUsername.getText().toString(), etPassword.getText().toString());
+                    user = new User(username, password);
                 } catch (Exception e) {
                     user = new User("error", "error");
 
@@ -60,30 +63,38 @@ public class RegistrationActivity extends AppCompatActivity {
                 boolean success = dbHelper.addUser(user);
 
                 // toasts to validate user creation
-                if (success && etPassword.getText().toString().equals(etConfirmPassword.getText().toString()) && !etUsername.getText().toString().equals("")) {
+                if (success && password.equals(confirmPassword) && !username.equals("") && !password.equals("")) {
                     Toast.makeText(RegistrationActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
                     startActivity(intent);
                 } else {
                     // No name entered
-                    if (etUsername.getText().toString().equals("")) {
+                    if (username.equals("")) {
                         WarnName.setText("Enter Name");
                         WarnName.setVisibility(View.VISIBLE);
                     }
 
                     // Check passwords
-                    if (etPassword.getText().toString().equals("")) {
+                    if (password.equals("")) {
                         WarnPassword1.setText("Enter Password");
                         WarnPassword1.setVisibility(View.VISIBLE);
                     }
 
                     // Password is not confirmed
-                    if (etConfirmPassword.getText().toString().equals("")) {
+                    if (confirmPassword.equals("")) {
                         WarnPassword2.setVisibility(View.VISIBLE);
                         WarnPassword2.setText("Confirm Password");
                     }
 
-                    if (!etPassword.getText().toString().equals("") && !etConfirmPassword.getText().toString().equals("")){
+                    if (!password.equals("")) {
+                        WarnPassword1.setVisibility(View.INVISIBLE);
+                    }
+
+                    if (!confirmPassword.equals("")) {
+                        WarnPassword2.setVisibility(View.INVISIBLE);
+                    }
+
+                    if (!password.equals(confirmPassword) && (!password.equals("") || !confirmPassword.equals(""))){
                         // Password != Password confirm
                         WarnPassword1.setVisibility(View.VISIBLE);
                         WarnPassword2.setVisibility(View.VISIBLE);
@@ -92,17 +103,10 @@ public class RegistrationActivity extends AppCompatActivity {
                     }
 
                     // Hide warning if it was taken care of
-                    if (!etUsername.getText().toString().equals("")) {
+                    if (!username.equals("")) {
                         WarnName.setVisibility(View.INVISIBLE);
                     }
 
-                    if (!etPassword.getText().toString().equals("")) {
-                        WarnPassword1.setVisibility(View.INVISIBLE);
-                    }
-
-                    if (!etConfirmPassword.getText().toString().equals("")) {
-                        WarnPassword2.setVisibility(View.INVISIBLE);
-                    }
                     Toast.makeText(RegistrationActivity.this, "Error creating user", Toast.LENGTH_SHORT).show();
                     }
                 }

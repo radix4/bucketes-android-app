@@ -107,19 +107,20 @@
         android:id="@+id/textWarnNameR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="-1dp"
         android:text="Enter Name"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="12sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/etRegisterUsername"
         app:layout_constraintEnd_toEndOf="@+id/etRegisterUsername"
-        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintHorizontal_bias="0.02"
         app:layout_constraintStart_toStartOf="@+id/etRegisterUsername" />
 
     <TextView
         android:id="@+id/textWarnPassword1R"
-        android:layout_width="133dp"
-        android:layout_height="25dp"
+        android:layout_width="109dp"
+        android:layout_height="17dp"
         android:text="Passwords didn’t match"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="12sp"
@@ -132,14 +133,14 @@
     <TextView
         android:id="@+id/textWarnPassword2R"
         android:layout_width="129dp"
-        android:layout_height="25dp"
+        android:layout_height="19dp"
         android:text="Confirm Password"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="12sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/etRegisterConfirmPassword"
         app:layout_constraintEnd_toEndOf="@+id/etRegisterConfirmPassword"
-        app:layout_constraintHorizontal_bias="0.031"
+        app:layout_constraintHorizontal_bias="0.037"
         app:layout_constraintStart_toStartOf="@+id/etRegisterConfirmPassword" />
 
     <TextView

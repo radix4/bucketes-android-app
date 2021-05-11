@@ -71,13 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                         WarnPassword.setVisibility(View.VISIBLE);
                         WarnPassword.setText("Enter Password");
                     }
-                    if (!etPassword.getText().toString().equals("") && !etUsername.getText().toString().equals("")){
-                        // Wrong name or password
-                        WarnPassword.setVisibility(View.VISIBLE);
-                        WarnName.setVisibility(View.VISIBLE);
-                        WarnName.setText("Wrong Name or Password");
-                        WarnPassword.setText("Wrong Name or Password");
-                    }
+
                     // Hide warning if it was taken care of
                     if (!etUsername.getText().toString().equals("")) {
                         WarnName.setVisibility(View.INVISIBLE);
@@ -85,6 +79,15 @@ public class LoginActivity extends AppCompatActivity {
                     if (!etPassword.getText().toString().equals("")) {
                         WarnPassword.setVisibility(View.INVISIBLE);
                     }
+
+                    if (!etPassword.getText().toString().equals("") && !etUsername.getText().toString().equals("")){
+                        // Wrong name or password
+                        WarnPassword.setVisibility(View.VISIBLE);
+                        WarnName.setVisibility(View.VISIBLE);
+                        WarnName.setText("Wrong Name or Password");
+                        WarnPassword.setText("Wrong Name or Password");
+                    }
+
                     Toast.makeText(LoginActivity.this, "Failed to login", Toast.LENGTH_SHORT).show();
                 }
             }
