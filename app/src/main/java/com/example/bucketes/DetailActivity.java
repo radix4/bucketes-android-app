@@ -26,11 +26,11 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
     private TextView  WarnTitle;
     String statusTxt, newStatusTxt;
     public static Item item;
-    Item passedItem = (Item) getIntent().getSerializableExtra("item"); // Get item title from main activity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Item passedItem = (Item) getIntent().getSerializableExtra("item"); // Get item title from main activity
         setContentView(R.layout.detailed_item);
 
         radioGroup = findViewById(R.id.radioGroup);
@@ -137,11 +137,7 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
     }
 
     public void goSave() {
-        DBHelper dbHelper = new DBHelper(DetailActivity.this);
-
-        boolean success = dbHelper.updateItem(passedItem, title.getText().toString(), date.getText().toString(), story.getText().toString(), newStatusTxt);
-        if (!success)
-            Toast.makeText(DetailActivity.this, "Failed to save", Toast.LENGTH_SHORT).show();
+        save.callOnClick();
     }
 
 }
