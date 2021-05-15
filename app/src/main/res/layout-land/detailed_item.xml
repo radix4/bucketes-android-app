@@ -96,11 +96,11 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="28dp"
             android:text="Cancel"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.592"
+            app:layout_constraintHorizontal_bias="0.523"
             app:layout_constraintStart_toEndOf="@+id/itemStory"
             app:layout_constraintTop_toBottomOf="@+id/button2" />
 
@@ -111,7 +111,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="52dp"
-            android:layout_marginTop="164dp"
+            android:layout_marginTop="220dp"
             android:text="Save"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

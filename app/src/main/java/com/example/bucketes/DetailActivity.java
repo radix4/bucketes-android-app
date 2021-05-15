@@ -21,12 +21,12 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
     RadioGroup radioGroup;
     RadioButton radioButton;
 
-    private User user;
     private Button cancel, save;
     private EditText title, story, date;
     private TextView  WarnTitle;
-    String statusTxt;
+    String statusTxt, newStatusTxt;
     public static Item item;
+    Item passedItem = (Item) getIntent().getSerializableExtra("item"); // Get item title from main activity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +41,6 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
         save = findViewById(R.id.button2);
         WarnTitle = findViewById(R.id.textWarnNameS2);
 
-        // Get item title from main activity
-        Item passedItem = (Item) getIntent().getSerializableExtra("item");
-
         // Set item title
         title.setText(passedItem.getTitle());
 
@@ -54,7 +51,7 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
         date.setText(passedItem.getCompletionDate());
 
         // Get item status from db
-        String statusTxt = passedItem.getStatus();
+        statusTxt = passedItem.getStatus();
         if (statusTxt != null) {
             switch (statusTxt) {
                 case "planned":
@@ -70,7 +67,6 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
                     radioButton.setChecked(true);
                     break;
             }
-            //radioButton.setChecked(true);
         }
 
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +75,6 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
                 DBHelper dbHelper = new DBHelper(DetailActivity.this);
 
                 openSaveDialog();
-
                 boolean success = dbHelper.updateItem(passedItem, title.getText().toString(), date.getText().toString(), story.getText().toString(), statusTxt);
 
                 if (success && !title.getText().toString().equals("")) {
@@ -93,17 +88,8 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
             @Override
             public void onClick(View v) {
                 DBHelper dbHelper = new DBHelper(DetailActivity.this);
-                //Item item;
 
-//                // attempt to instantiate item
-//                try {
-//                    item = new Item(title.getText().toString(), story.getText().toString());
-//                } catch (Exception e) {
-//                    item = new Item("error", "error");
-//                    Toast.makeText(DetailActivity.this, "Error adding title", Toast.LENGTH_SHORT).show();
-//                }
-
-                boolean success = dbHelper.updateItem(passedItem, title.getText().toString(), date.getText().toString(), story.getText().toString(), statusTxt);
+                boolean success = dbHelper.updateItem(passedItem, title.getText().toString(), date.getText().toString(), story.getText().toString(), newStatusTxt);
 
                 if (success && !title.getText().toString().equals("")){
                     Intent intent = new Intent(DetailActivity.this, MainActivity.class);
@@ -134,7 +120,7 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
     public void checkButton(View v){
         int radioId = radioGroup.getCheckedRadioButtonId();
         radioButton = findViewById(radioId);
-        statusTxt = radioButton.getText().toString();
+        newStatusTxt = radioButton.getText().toString();
         Toast.makeText(this, "Selected: " + radioButton.getText(), Toast.LENGTH_SHORT).show();
     }
 
@@ -151,8 +137,11 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
     }
 
     public void goSave() {
-        Intent intent = new Intent(DetailActivity.this, MainActivity.class);
-        startActivity(intent);
+        DBHelper dbHelper = new DBHelper(DetailActivity.this);
+
+        boolean success = dbHelper.updateItem(passedItem, title.getText().toString(), date.getText().toString(), story.getText().toString(), newStatusTxt);
+        if (!success)
+            Toast.makeText(DetailActivity.this, "Failed to save", Toast.LENGTH_SHORT).show();
     }
 
 }

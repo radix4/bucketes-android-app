@@ -22,7 +22,7 @@ public class SaveDialog extends AppCompatDialogFragment {
                 .setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        listener.goBack();
+                        listener.goSave();
                         // automatically closes dialog
                     }
                 }).setNegativeButton("Disregard", new DialogInterface.OnClickListener() {

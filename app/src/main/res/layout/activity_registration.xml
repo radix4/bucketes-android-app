@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".RegistrationActivity">
 
-    <ImageView
-        android:id="@+id/image4"
-        android:layout_width="433dp"
-        android:layout_height="147dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etLinkToActivityLogin"
-        app:srcCompat="@drawable/component2" />
-
     <TextView
         android:id="@+id/welcomeTextR"
         android:layout_width="335dp"
@@ -36,7 +25,7 @@
         android:id="@+id/imageView"
         android:layout_width="203dp"
         android:layout_height="134dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcomeTextR"
@@ -86,9 +75,11 @@
         style="@style/AppTheme.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginBottom="35dp"
         android:background="@android:color/holo_purple"
         android:text="Register"
+        app:layout_constraintBottom_toTopOf="@+id/etLinkToActivityLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
@@ -147,14 +138,21 @@
         android:id="@+id/etLinkToActivityLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="15dp"
         android:autoLink="all"
         android:text="Already registered? Sign In"
         android:textColor="#9851e9"
-        app:layout_constraintBottom_toTopOf="@+id/image4"
+        app:layout_constraintBottom_toTopOf="@+id/imageView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="557dp"
+        android:layout_height="97dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRegister"
-        app:layout_constraintVertical_bias="0.65999997" />
+        app:srcCompat="@drawable/component2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
