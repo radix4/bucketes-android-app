@@ -15,14 +15,7 @@ import com.example.bucketes.models.User;
 
 public class LoginActivity extends AppCompatActivity {
     private static String TAG = "LoginActivity";
-
-    private TextView txtWarnName,txtWarnPassword;
-    private ConstraintLayout parent;
-    DBHelper DB;
-
     public static User user;
-
-    // initialize variables
     private TextView tvLinkToActivityRegistration, WarnName, WarnPassword;
     private EditText etUsername, etPassword;
     private Button btnLogin;

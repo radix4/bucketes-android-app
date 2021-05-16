@@ -88,8 +88,8 @@
 
     <TextView
         android:id="@+id/textWarnNameR"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="143dp"
+        android:layout_height="16dp"
         android:text="Enter Name"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="12sp"
@@ -101,8 +101,8 @@
 
     <TextView
         android:id="@+id/textWarnPassword1R"
-        android:layout_width="122dp"
-        android:layout_height="17dp"
+        android:layout_width="158dp"
+        android:layout_height="16dp"
         android:text="Passwords didn’t match"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="12sp"
@@ -114,8 +114,8 @@
 
     <TextView
         android:id="@+id/textWarnPassword2R"
-        android:layout_width="126dp"
-        android:layout_height="18dp"
+        android:layout_width="162dp"
+        android:layout_height="16dp"
         android:text="Confirm Password"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="12sp"

@@ -87,8 +87,8 @@
 
     <TextView
         android:id="@+id/textWarnNameS"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="101dp"
+        android:layout_height="17dp"
         android:text="Enter Name"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="12sp"
@@ -100,8 +100,8 @@
 
     <TextView
         android:id="@+id/textWarnPasswordS"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="111dp"
+        android:layout_height="18dp"
         android:text="Enter Password"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="12sp"

@@ -27,9 +27,7 @@ import java.util.List;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity implements LogoutDialog.CustomDialogListener, AddItemDialog.CustomDialogListener, DeleteDialog.CustomDialogListener, MainRecyclerViewAdapter.ItemClickListener {
-
     RecyclerView mainRecyclerView;
-
     private User user;
     private List<Item> items = new ArrayList<>();
     private Set<String> itemsName = new HashSet<>();    /* this data structure checks for duplicates (aka two items in the same list cannot have same titles) */

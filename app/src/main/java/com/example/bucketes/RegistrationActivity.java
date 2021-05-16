@@ -16,10 +16,6 @@ import com.example.bucketes.models.User;
 public class RegistrationActivity extends AppCompatActivity {
     private static String TAG = "RegistrationActivity";
 
-    private EditText txtWarnPassword1, txtWarnPassword2;
-    private TextView txtWarnName;
-    private ConstraintLayout parent;
-
     private TextView tvLinkToActivityLogin, WarnName, WarnPassword1, WarnPassword2;
     private EditText etUsername, etPassword, etConfirmPassword;
     private Button btnRegister;
@@ -51,65 +47,65 @@ public class RegistrationActivity extends AppCompatActivity {
                 String password = etPassword.getText().toString();
                 String confirmPassword = etConfirmPassword.getText().toString();
 
-                // attempt to instantiate user
-                try {
-                    user = new User(username, password);
-                } catch (Exception e) {
-                    user = new User("error", "error");
-
-                    Toast.makeText(RegistrationActivity.this, "Error creating user", Toast.LENGTH_SHORT).show();
-                }
-
-                boolean success = dbHelper.addUser(user);
-
-                // toasts to validate user creation
-                if (success && password.equals(confirmPassword) && !username.equals("") && !password.equals("")) {
-                    Toast.makeText(RegistrationActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
-                    startActivity(intent);
+                if (password != confirmPassword) {
+                    WarnPassword1.setVisibility(View.VISIBLE);
+                    WarnPassword2.setVisibility(View.VISIBLE);
+                    WarnPassword1.setText("Passwords don't match");
+                    WarnPassword2.setText("Passwords don't match");
                 } else {
-                    // No name entered
-                    if (username.equals("")) {
-                        WarnName.setText("Enter Name");
-                        WarnName.setVisibility(View.VISIBLE);
+
+                    // attempt to instantiate user
+                    try {
+                        user = new User(username, password);
+                    } catch (Exception e) {
+                        user = new User("error", "error");
+
+                        Toast.makeText(RegistrationActivity.this, "Error creating user", Toast.LENGTH_SHORT).show();
                     }
 
-                    // Check passwords
-                    if (password.equals("")) {
-                        WarnPassword1.setText("Enter Password");
-                        WarnPassword1.setVisibility(View.VISIBLE);
-                    }
+                    boolean success = dbHelper.addUser(user);
 
-                    // Password is not confirmed
-                    if (confirmPassword.equals("")) {
-                        WarnPassword2.setVisibility(View.VISIBLE);
-                        WarnPassword2.setText("Confirm Password");
-                    }
+                    // toasts to validate user creation
+                    if (success && password.equals(confirmPassword) && !username.equals("") && !password.equals("")) {
+                        Toast.makeText(RegistrationActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    } else {
+                        // No name entered
+                        if (username.equals("")) {
+                            WarnName.setText("Enter Name");
+                            WarnName.setVisibility(View.VISIBLE);
+                        }
 
-                    if (!password.equals("")) {
-                        WarnPassword1.setVisibility(View.INVISIBLE);
-                    }
+                        // Check passwords
+                        if (password.equals("")) {
+                            WarnPassword1.setText("Enter Password");
+                            WarnPassword1.setVisibility(View.VISIBLE);
+                        }
 
-                    if (!confirmPassword.equals("")) {
-                        WarnPassword2.setVisibility(View.INVISIBLE);
-                    }
+                        // Password is not confirmed
+                        if (confirmPassword.equals("")) {
+                            WarnPassword2.setVisibility(View.VISIBLE);
+                            WarnPassword2.setText("Confirm Password");
+                        }
 
-                    if (!password.equals(confirmPassword) && (!password.equals("") || !confirmPassword.equals(""))){
-                        // Password != Password confirm
-                        WarnPassword1.setVisibility(View.VISIBLE);
-                        WarnPassword2.setVisibility(View.VISIBLE);
-                        WarnPassword1.setText("Passwords don't match");
-                        WarnPassword2.setText("Passwords don't match");
-                    }
+                        // Hide warning after they were taken care of
+                        if (!password.equals("")) {
+                            WarnPassword1.setVisibility(View.INVISIBLE);
+                        }
 
-                    // Hide warning if it was taken care of
-                    if (!username.equals("")) {
-                        WarnName.setVisibility(View.INVISIBLE);
-                    }
+                        if (!confirmPassword.equals("")) {
+                            WarnPassword2.setVisibility(View.INVISIBLE);
+                        }
 
-                    Toast.makeText(RegistrationActivity.this, "Error creating user", Toast.LENGTH_SHORT).show();
+                        if (!username.equals("")) {
+                            WarnName.setVisibility(View.INVISIBLE);
+                        }
+
+                        Toast.makeText(RegistrationActivity.this, "Error creating user", Toast.LENGTH_SHORT).show();
                     }
                 }
+            }
         });
 
         // upon click switches to Activity Login

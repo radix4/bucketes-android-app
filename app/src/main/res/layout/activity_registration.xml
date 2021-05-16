@@ -110,8 +110,8 @@
 
     <TextView
         android:id="@+id/textWarnPassword1R"
-        android:layout_width="109dp"
-        android:layout_height="17dp"
+        android:layout_width="135dp"
+        android:layout_height="19dp"
         android:text="Passwords didn’t match"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="12sp"

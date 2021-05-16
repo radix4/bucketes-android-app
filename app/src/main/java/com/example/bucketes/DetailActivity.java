@@ -17,14 +17,12 @@ import com.example.bucketes.models.Item;
 import com.example.bucketes.models.User;
 
 public class DetailActivity extends AppCompatActivity implements SaveDialog.CustomDialogListener {
-
     RadioGroup radioGroup;
     RadioButton radioButton;
-
     private Button cancel, save;
     private EditText title, story, date;
     private TextView  WarnTitle;
-    String statusTxt, newStatusTxt;
+    String statusTxt, titleTxt, storyTxt, dateTxt, newStatusTxt, newTitleTxt, newStoryTxt, newDateTxt;
     public static Item item;
 
     @Override
@@ -41,6 +39,11 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
         save = findViewById(R.id.button2);
         WarnTitle = findViewById(R.id.textWarnNameS2);
 
+        statusTxt = passedItem.getStatus();
+        titleTxt = passedItem.getTitle();
+        storyTxt = passedItem.getStory();
+        dateTxt = passedItem.getCompletionDate();
+
         // Set item title
         title.setText(passedItem.getTitle());
 
@@ -51,7 +54,6 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
         date.setText(passedItem.getCompletionDate());
 
         // Get item status from db
-        statusTxt = passedItem.getStatus();
         if (statusTxt != null) {
             switch (statusTxt) {
                 case "planned":
@@ -74,12 +76,20 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
             public void onClick(View v) {
                 DBHelper dbHelper = new DBHelper(DetailActivity.this);
 
-                openSaveDialog();
-                boolean success = dbHelper.updateItem(passedItem, title.getText().toString(), date.getText().toString(), story.getText().toString(), statusTxt);
+                newDateTxt = date.getText().toString();
+                newTitleTxt = title.getText().toString();
+                newStoryTxt = story.getText().toString();
 
-                if (success && !title.getText().toString().equals("")) {
-                    Intent intent = new Intent(DetailActivity.this, MainActivity.class);
-                    startActivity(intent);
+                if (titleTxt == newTitleTxt && storyTxt == newStoryTxt && dateTxt == newDateTxt) {
+                    goBack();
+                } else {
+                    openSaveDialog();
+                    boolean success = dbHelper.updateItem(passedItem, newTitleTxt, newDateTxt, newStoryTxt, statusTxt);
+
+                    if (success && !title.getText().toString().equals("")) {
+                        Intent intent = new Intent(DetailActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
                 }
             }
         });
