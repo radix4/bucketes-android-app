@@ -101,6 +101,15 @@ public class DetailActivity extends AppCompatActivity implements SaveDialog.Cust
 
                 boolean success = dbHelper.updateItem(passedItem, title.getText().toString(), date.getText().toString(), story.getText().toString(), newStatusTxt);
 
+                if (!success) {
+                    if (title.getText().toString().equals("")) {
+                        WarnTitle.setVisibility(View.VISIBLE);
+                        WarnTitle.setText("Required");
+                    }
+                    return;
+                }
+
+
                 if (success && !title.getText().toString().equals("")){
                     Intent intent = new Intent(DetailActivity.this, MainActivity.class);
                     startActivity(intent);

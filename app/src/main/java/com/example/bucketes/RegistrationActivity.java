@@ -47,6 +47,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 String password = etPassword.getText().toString();
                 String confirmPassword = etConfirmPassword.getText().toString();
 
+
                 if (!password.equals(confirmPassword)) {
                     WarnPassword1.setVisibility(View.VISIBLE);
                     WarnPassword2.setVisibility(View.VISIBLE);
