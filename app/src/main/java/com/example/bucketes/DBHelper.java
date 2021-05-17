@@ -215,6 +215,8 @@ public class DBHelper extends SQLiteOpenHelper {
      * This function updates item info in the db.
      * */
     public boolean updateItem(Item item, String newTitle, String newDate, String newStory, String newStatus) {
+        if (newTitle.isEmpty()) return false;
+
         SQLiteDatabase db = this.getWritableDatabase();
 
         String query = "UPDATE " + ITEMS_TABLE + " SET " + COL_TITLE + " = '" + newTitle + "', " + COL_COMPLETION_DATE
