@@ -13,6 +13,11 @@ public class Item implements Serializable {
         this.username = username;
         this.title = title;
     }
+    public Item(String username, String title, String status) {
+        this.username = username;
+        this.title = title;
+        this.status = status;
+    }
 
     /** Constructor */
     public Item(String username, String title, String story, String completionDate, String status) {

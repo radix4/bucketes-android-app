@@ -64,7 +64,11 @@ public class RegistrationActivity extends AppCompatActivity {
                         Toast.makeText(RegistrationActivity.this, "Error creating user", Toast.LENGTH_SHORT).show();
                     }
 
+
                     boolean success = dbHelper.addUser(user);
+                    if (!success) {
+                        Toast.makeText(RegistrationActivity.this, "Error! Username already exists", Toast.LENGTH_SHORT).show();
+                    }
 
                     // toasts to validate user creation
                     if (success && password.equals(confirmPassword) && !username.equals("") && !password.equals("")) {

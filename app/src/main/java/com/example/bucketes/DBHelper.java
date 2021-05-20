@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.RadioButton;
+
+
 
 import com.example.bucketes.models.Item;
 import com.example.bucketes.models.User;
@@ -25,6 +28,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COL_STORY = "story";
     public static final String COL_COMPLETION_DATE = "completion_date";
     public static final String COL_STATUS = "status";
+    RadioButton radioButton;
 
     /**
      * This function creates the database if the database has not been created.
@@ -136,11 +140,11 @@ public class DBHelper extends SQLiteOpenHelper {
         /* item's username and title must have */
         cv.put(COL_USERNAME, item.getUsername());
         cv.put(COL_TITLE, item.getTitle());
-
+        cv.put(COL_STATUS, "planned");
         /* item's story, completion date, and status can be updated later */
         if (item.getStory() != null) cv.put(COL_STORY, item.getStory());
         if (item.getCompletionDate() != null) cv.put(COL_COMPLETION_DATE, item.getCompletionDate());
-        if (item.getStatus() != null) cv.put(COL_STATUS, item.getStatus());
+        // if (item.getStatus() != null) cv.put(COL_STATUS, item.getStatus());
 
         long insert = db.insert(ITEMS_TABLE, null, cv);
 

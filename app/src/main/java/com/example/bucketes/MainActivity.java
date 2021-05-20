@@ -126,7 +126,8 @@ public class MainActivity extends AppCompatActivity implements LogoutDialog.Cust
         }
 
         /* instantiate new item */
-        Item item = new Item(user.getUsername(), title);
+        Item item = new Item(user.getUsername(), title, "planned");
+
 
         /* add item to db */
         dbHelper.addItem(item);
